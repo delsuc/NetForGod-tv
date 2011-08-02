@@ -9,9 +9,10 @@ w
 # import the configuration
 . configuration.sh
 
-if [ -f FOI-blocked.lock ]; then echo calcul bloque volontairement;
-  echo le fichier FOI-blocked.lock doit etre retire manuellement;
-  exit;
+if [ -f FOI-blocked.lock ]; then
+    echo calcul bloque volontairement;
+    echo le fichier FOI-blocked.lock doit etre retire manuellement
+    exit
 fi
 
 # ouvre les fichiers de VOD
@@ -21,12 +22,13 @@ fi
 ./clean.sh
 
 # fabrique tous les fichiers video et les fichiers html
-if ! [ -f FOI-working.lock ]; then touch FOI-working.lock; 
-   make -s  -C $VIDEOdir  -f $PWD/Makefile  all;
+if ! [ -f FOI-working.lock ]; then
+   touch FOI-working.lock
+   make -C $VIDEOdir  -f $PWD/Makefile  all
    python do_vod.py
-   rm FOI-working.lock;
+   rm FOI-working.lock
 else 
-  echo "calcul deja actif (FOI-working.lock)";
+  echo "calcul deja actif (FOI-working.lock)"
 fi
 
 # pour le faire a la main

@@ -46,8 +46,9 @@ except KeyError:
     raise Exception("the environment variable VIDEOdir should be set before running, see configuration.sh")
 
 #là où l'on trouve les fichiers annexes
-PrgmDir=os.path.realpath(os.curdir)
-
+PrgmDir = os.path.realpath(os.curdir)
+# html templates
+TmplDir = os.path.join(PrgmDir, "tmpl")
 
 def clean(st):
    """nettoie les characteres interdit"""
@@ -72,11 +73,11 @@ class VodPage:
         """charge la base de la page html pour le VOD en mode liste"""
         import os.path as op
         if (self.langue == "FR"):
-            VOD=file(op.join(PrgmDir,"vod_list_fr.html"))
+            VOD=file(op.join(TmplDir,"vod_list_fr.html"))
             r = "".join(VOD.readlines())
             VOD.close()
         else:
-            VOD=file(op.join(PrgmDir,"vod_list_en.html"))
+            VOD=file(op.join(TmplDir,"vod_list_en.html"))
             r = "".join(VOD.readlines())
             VOD.close()
         return r
@@ -86,11 +87,11 @@ class VodPage:
         import os.path as op
 # base html de la page -  2 versions _fr et _en - les champs %s sont remplacés au moment de l'utilisation
         if (self.langue == "FR"):
-            VOD=file(op.join(PrgmDir,"vod_fr.html"))
+            VOD=file(op.join(TmplDir,"vod_fr.html"))
             r = "".join(VOD.readlines())
             VOD.close()
         else:
-            VOD=file(op.join(PrgmDir,"vod_en.html"))
+            VOD=file(op.join(TmplDir,"vod_en.html"))
             r = "".join(VOD.readlines())
             VOD.close()
         return r

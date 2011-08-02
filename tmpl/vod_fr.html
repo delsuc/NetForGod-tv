@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="fr">
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+	<title>NetForGod TV</title>
+	<link href="/nfg.css" type="text/css" media="screen" rel="stylesheet"/>
+	<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+	<meta name="author" content="MA.D Communauté du chemin-neuf"/>
+	<meta name="description" content="presentation des Videos publiées par Netforgod"/>
+	<meta name="keywords" content="video, film, netforgod" />
+	<meta name="generator" content="do_vod.py"/>
+<script type="text/javascript" src="/js/langues.js"></script>
+<script type="text/javascript" src="/js/swfobject.js"></script>
+<script type='text/javascript'>
+<!--
+var Aflv = new Array ( %(flv)s );
+var Atitre = new Array ( %(titre)s );
+var Alangue = new Array ( %(langs)s );
+var Ares = new Array ( %(Ares)s );
+var Adia = new Array ( %(Adia)s );
+/*@cc_on @if (@_win32 && @_jscript_version >= 5) if (!window.XMLHttpRequest) window.XMLHttpRequest = function() { return new ActiveXObject('Microsoft.XMLHTTP') } @end @*/
+
+function PresMois(mois) {	  /* avec langue par defaut = 0 (FR) */
+	PresMoisLangue(mois,0);
+}
+
+function PresMoisLangue(mois,lang) {
+	CalLangue(mois,lang);
+	var langue=Alangue[mois].split(" ");
+	var html = '<p class="titre-mois">' + Atitre[mois] + "</p>";
+	var xmldt
+	var xmlhttp =  new XMLHttpRequest();
+	xmlhttp.open('GET', 'clic.php', true);
+	xmlhttp.onreadystatechange = function() { if (xmlhttp.readyState == 4) { xmldt=xmlhttp.responseXML.getElementsByTagName('heure')[0] } }
+	xmlhttp.send(null);
+	li = langue[lang];
+	html = html +'<div class="langues">';
+	if (langue.length>1) {
+		html = html + '<p><span class="Blangue">' +SelfLang[li] + '</span>';
+		if (Ares[mois]) {
+			var urlres = "javascript:openWindow('resume.php?c="+Aflv[mois]+"&l="+langue[lang]+"&d="+langue[0]+"')";
+			html = html+' - <a href="'+urlres+'">' + ResLang[li] + ' </a> - ';
+		}
+ 		html = html+'</p><p>choisissez une autre langue:</p><p> - ';
+		for(var i = 0; i < langue.length; i++) {
+		  if (i != lang) {
+			li = langue[i];
+			html += ' <a href="#" onclick="javascript:PresMoisLangue(' +mois+ ',' +i+ ')" title="' + SelfLang[li] + '">' +FRLang[li]+ '</a> - ';
+		  }
+		}
+	}
+	html=html+'</p>';
+	if (Ares[mois] || Adia[mois]){
+		html = html+'<hr width="60%%"><p class="diapo">';
+		if (Ares[mois]) {
+			var urlres = "javascript:openWindow('resume.php?c="+Aflv[mois]+"&l="+langue[lang]+"&d="+langue[0]+"')";
+			html = html+'<a href="'+urlres+'">R&eacute;sum&eacute;</a><br/>';
+		}
+		if (Adia[mois]) {
+			var urlpres = Aflv[mois] + "/diaporama.html";
+			html = html+'<a href="'+urlpres+' "target="_blank">Diaporama</a>';
+		}
+		html = html+"</p>";
+	}
+	html=html+'<hr width="60%%"></div>';
+//	alert(html);
+	var faire = document.getElementById('lvideo');
+	faire.innerHTML = html;
+}
+
+function CalLangue(mois,lang){
+	var langue=Alangue[mois].split(" ");
+	var lg = langue[lang];
+	var vid = Aflv[mois]+ "/" + lg + "_divx.flv"
+	var aff = Aflv[mois]+ "/affiche.jpg";
+	var s1 = new SWFObject("jw_flvplayer.swf","single","352","287","7");
+	s1.addParam("allowfullscreen","true");
+	s1.addVariable("file",vid);
+	s1.addVariable("image",aff);
+	s1.addVariable("width","352");
+	s1.addVariable("height","287");
+	s1.addVariable('frontcolor','0x5f6486');
+	s1.addVariable('lightcolor','0xFFFFFF');
+	s1.addVariable('backcolor','0x000000');
+	s1.write("video_nfg");
+}
+function openWindow(url) { popup=window.open(url,'Resume','resizable, scrollbars, width=550,height=450'); }
+// -->
+</script>
+</head>
+<body onload="PresMois(0)">
+<a href="/frat.html"><img id="logo" src="/images/logo_blanc_transp_smal.png" alt="Logo" border="0" title="Réseau NetForGod"/></a>
+<a href="/" alt="home"><img border="0" id="header" src="/images/bande-800-s.jpg" alt="header"/></a>
+<div id="bandeau">
+	<div class="bd-gauche">
+ <a id="ccn" href="http://www.chemin-neuf.org"><img src="/images/logo_k4.gif" height="35" border="0" alt="Logo Communaute du Chemin-neuf" title="Communauté du Chemin-Neuf"/></a>
+	Au service de l'UNITÉ des CHRÉTIENS et de la PAIX dans le MONDE.
+	</div>
+	<div class="bd-droit">
+	Français <a href="%(autrepage)s" class="faded">/ English</a>
+	</div>
+
+</div>
+<div id="page">
+<div id="video">
+<p class="titre"><i>cliquez sur l'image pour voir le film</i></p>
+<div id="video_nfg">
+		<img src="http://www.adobe.com/images/icons/alert.gif" alt="Alert" height="16" width="16"/>Cette page nécessite Flash
+		<p class="titre-mois">Pour voir ce contenu, Javascript doit être activé
+et vous télécharger Adobe Flash Player .</p>
+		<p class="titre-mois"><a href="http://get.adobe.com/fr/flashplayer" target="_top">
+Télécharger maintenant!</a></p>
+		<a href="http://get.adobe.com/fr/flashplayer" class="noHover" target="_top"><img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash Player" border="0" height="33" width="112"/></a>
+
+</div>
+<div id="lvideo">
+</div>
+</div>
+<div id="presentation">
+Le dernier Film.
+%(video_du_mois)s
+</div>
+<div id="liste">
+	Les films précédents
+	<div class="tbemission">
+%(table_video)s
+	</div>
+</div>
+<br clear="all"/>
+<div id="basdepage">
+<hr/>
+<p>
+- <a href="http://www.ame-boutique.com/index.php?scat=45">Acheter les DVD</a>
+- <a href="/frat.html">Découvir la fraternité NetForGod</a>
+- </p>
+<p><i><a href="liste.html" title="page statique">Cliquez ici si cette page s'affiche mal.</a></i></p>
+<hr/>
+<div id="pied">
+<ul>
+<li><a href="copyright.html">&copy; C.C.N.</a></li>
+<li>| <a href="http://chemin-neuf.org">La communaut&eacute; du Chemin-Neuf </a> | </li>
+<li><a href="mentions.html">mentions l&eacute;gales</a> | </li>
+<li><a href="mailto:netforgod@chemin-neuf.org?cc=nfg.webmaster@gmail.com&amp;ct=depuis le site netforgod.tv" >contactez-nous</a> | </li>
+<li><a href="http://www.mozilla-europe.org/fr/products/firefox/" target="_blank">Ce site est optimis&eacute; pour Firefox</a></li>
+<li><a href="http://validator.w3.org/check?uri=referer"><img
+src="http://www.w3.org/Icons/valid-xhtml10"
+alt="Valid XHTML 1.0 Transitional" height="31" width="88" /></a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%%3E%%3C/script%%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-4576934-2");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+</body>
+</html>

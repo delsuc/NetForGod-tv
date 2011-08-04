@@ -12,6 +12,8 @@ __author__ = "M-A.Delsuc"
 __version__ = "1.2 feb 2009"
 __copy__ = "Communauté du Chemin-Neuf"
 
+import os
+
 # le nom des mois en français
 mois_nom =  [" ","janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"]
 mois_nom_court =  [" ","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]
@@ -58,9 +60,11 @@ resume = {
 # l'ordre des langues
 ordrelangues = 'FR EN DE ES IT PT HU NL CS SK LV LT PL RU TR HY AR ZH JA VI MOS LN RN MU MG'
 
-def create_js(filename="langues2.js"):
+def create_js(filename=None):
     """crée un fichier javascript qui sera utilisable dans les pages WEB"""
     import datetime
+    if not filename:
+        filename = os.environ["WEBROOT"] + "/js/langues.js"
     F=file(filename,'w')
     now = datetime.datetime.now()
     F.writelines("""// Javascript library for handling various foreign languages

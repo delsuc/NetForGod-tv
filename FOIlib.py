@@ -287,7 +287,7 @@ class presentation:
 <head>
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
 <title>%(flat_title)s</title>
-<link href="/nfg.css" type="text/css" media="screen" rel="stylesheet">
+<link href="/css/nfg.css" type="text/css" media="screen" rel="stylesheet">
 <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
 <script language="JavaScript">
 <!--
@@ -385,7 +385,7 @@ class resume:
 <html>
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
-	<link rel="stylesheet" href="/nfg.css" type="text/css" media="screen" title="no title" charset="utf-8">
+	<link rel="stylesheet" href="/css/nfg.css" type="text/css" media="screen" title="no title" charset="utf-8">
 </head>
 <body>
 <div id="page-centree">
@@ -445,7 +445,7 @@ class video:
 <head>
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
 <title>%(flat_title)s</title>
-<link href="/nfg.css" type="text/css" media="screen" rel="stylesheet">
+<link href="/css/nfg.css" type="text/css" media="screen" rel="stylesheet">
 <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
 <script language="JavaScript">
 <!--

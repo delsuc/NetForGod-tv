@@ -11,20 +11,20 @@
 # partie adaptable à la configuration
 
 # address of the prgm directory, which contains this Makefile and all the scripts
-MAKEdir = /home/netforgod/prgm
+#MAKEdir = /home/netforgod/FOI_prgm
 
 # three directories
 # VIDEO : contains genuine content
 # DIVX : fake directories linked to the real ones
 # VOD : contains flv and other VOD material
 # address of the VOD directory
-VIDEOdir = /home/netforgod/www/videos
+#VIDEOdir = /home/netforgod/www/videos
 
 # address of the VOD directory
-VODdir = /home/netforgod/www/VOD
+#VODdir = /home/netforgod/www/VOD
 
 # address of the DIVX directory
-DIVXdir = /home/netforgod/www/FOI
+#DIVXdir = /home/netforgod/www/FOI
 
 # commandes pour les codeurs
 
@@ -154,16 +154,15 @@ index:
 	done
 
 
-# updates all the relations between the distrib directory : DIVXdir , VODdir  and repository : CURDIR (list is in foiDIR)
+# updates all the relations between the distrib directory : VODdir  and repository : CURDIR (list is in foiDIR)
 .PHONY: link
 link:
 	@for dir in $(foiDIR); \
 	do \
-		ln -f -s $(CURDIR)/$$dir $(DIVXdir); \
 		mkdir -p $(VODdir)/$$dir; \
 		ln -f -s $(CURDIR)/$$dir/affiche.jpg $(VODdir)/$$dir; \
 	done
-
+#ln -f -s $(CURDIR)/$$dir $(DIVXdir); \
 
 
 ###################################################

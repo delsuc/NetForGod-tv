@@ -1,0 +1,34 @@
+body {
+    background-color:#000;
+    color:#FFFFCC;
+    font-size:10pt; 
+    font-family: "Lucida Grande", "Trebuchet MS", verdana,sans-serif;
+}
+#page {
+    width:800px;
+    margin-left:auto; margin-right:auto;
+}
+
+#bouttons {    top:0px;  }
+#bouttons li {float: left; list-style: none; font-size: 12pt; width:12.5%; text-align:center; }
+#bouttons a {     font-size: 12pt; background-color: #000;}
+#bouttons a:hover {    background-color: #444; }
+
+ul P { margin-left: 40px;  }
+
+TABLE {margin-left: 80px;}
+
+H1 {text-align: center;}
+
+H2 {margin-left: -40px;}
+
+a { color:#FF0033; text-decoration:none;}
+
+a:hover {background-color: #444;}
+
+.ex { background-color:#444; color:#FFF; }
+
+.ex_it { font-style : italic; background-color:#804; color:#FFF; }
+
+.gros { font: italic 12pt; }
+

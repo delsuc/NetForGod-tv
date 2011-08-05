@@ -25,8 +25,12 @@ $VIDEOdir="/home/netforgod/www/videos";
 #export VODdir=/Users/mad/Desktop/NFG/VOD
 $VODdir="/home/netforgod/www/VOD";
 
+########################################
 # la notice de copyright
 $COPYRIGHT="NetForGod";
+
+#film price
+$prix_film = 10.00;
 
 ########################################
 

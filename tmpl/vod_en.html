@@ -40,7 +40,7 @@ function PresMoisLangue(mois,lang) {
 	if (langue.length>1) {
 		html = html + '<p><span class="Blangue">' +SelfLang[li] + '</span>';
 		if (Ares[mois]) {
-			var urlres = "javascript:openWindow('resume.php?c="+Aflv[mois]+"&l="+langue[lang]+"&d="+langue[1]+"')";
+			var urlres = "javascript:openWindow('/s/resume.php?c="+Aflv[mois]+"&l="+langue[lang]+"&d="+langue[1]+"')";
 			html = html+' - <a href="'+urlres+'">' + ResLang[li] + ' </a> - ';
 		}
 		html = html+'</p><p>choose another language:</p><p> - ';
@@ -55,7 +55,7 @@ function PresMoisLangue(mois,lang) {
 	if (Ares[mois] || Adia[mois]){
 		html = html+'<hr width="60%%"><p class="diapo">';
 		if (Ares[mois]) {
-			var urlres = "javascript:openWindow('resume.php?c="+Aflv[mois]+"&l="+langue[lang]+"&d="+langue[1]+"')";
+			var urlres = "javascript:openWindow('/s/resume.php?c="+Aflv[mois]+"&l="+langue[lang]+"&d="+langue[1]+"')";
 			html = html+'<a href="'+urlres+'">Summary</a><br/>';
 		}
 		if (Adia[mois]) {
@@ -75,7 +75,7 @@ function CalLangue(mois,lang){
 	var lg = langue[lang];
 	var vid = Aflv[mois]+ "/" + lg + "_divx.flv"
 	var aff = Aflv[mois]+ "/affiche.jpg";
-	var s1 = new SWFObject("jw_flvplayer.swf","single","352","287","7");
+	var s1 = new SWFObject("/s/jw_flvplayer.swf","single","352","287","7");
 	s1.addParam("allowfullscreen","true");
 	s1.addVariable("file",vid);
 	s1.addVariable("image",aff);

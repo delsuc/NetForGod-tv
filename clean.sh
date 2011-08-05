@@ -10,7 +10,6 @@ depot=$VIDEOdir
 delai="+100"
 
 # liste de toutes les videos non lues depuis un certain temps
-echo "find $depot -name "*_divx.avi" -not -name FR_divx.avi -not -name EN_divx.avi -not -empty -atime $delai"
 l=`find $depot -name "*_divx.avi" -not -name FR_divx.avi -not -name EN_divx.avi -not -empty -atime $delai`
 
 for i in $l; do

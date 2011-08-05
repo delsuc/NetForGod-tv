@@ -1,6 +1,10 @@
 # This file contains all the configuration parameters for the FOI project
 
 #######################################
+# choose debug mode, comment when in production !
+export DEBUG_MODE=1
+
+#######################################
 # name of the WEB site :
 export WEBSITE="www.netforgod.tv"
 #######################################

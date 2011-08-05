@@ -1,4 +1,3 @@
-www-data@nfg1:~$ cat VOD/perm.php
 <?php
 function titre($video)  {
     # retourne le titre en français d'une video
@@ -42,7 +41,7 @@ if (! $ok) {    # someting is wrong
 <head>
 <meta http-equiv="content-type" content="text/html;charset=utf-8">
 <title> <?php echo $title;?> </title>
-<link href="/nfg.css" type="text/css" media="screen" rel="stylesheet">
+<link href="/css/nfg.css" type="text/css" media="screen" rel="stylesheet">
 <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico">
 <script type="text/javascript" src="/js/swfobject.js"></script>
 <script language="JavaScript">
@@ -177,4 +176,3 @@ pageTracker._trackPageview();
 </script>
 </body></html>
 <?php } # else (no problem) ?>
-www-data@nfg1:~$ 

@@ -43,6 +43,7 @@ sort($list_video);
 sort($list_FOI);
 
 $bavard = TRUE;
+$debug = FALSE;
 
 # nom de la video du mois
 $video_du_mois="none";
@@ -129,6 +130,17 @@ function titre_en($video)  {
         $FTITRE = "<i>no title</i>";
     }
     return $FTITRE;
+}
+
+function resume($video,$lang)  {
+    # retourne le résumé  d'une video
+    global $basevideos,$debug;
+    @$FRES = file_get_contents("$basevideos/$video/textes/resume_$lang.txt");
+    if ($debug){echo "debug - resume() -"; print_r("$basevideos/$video/textes/resume_$lang.txt"); echo "<br>";}
+    if (! $FRES) {
+        $FRES = "";
+    }
+    return $FRES;
 }
 
 function affiche($video) {
@@ -266,3 +278,10 @@ function makelog($text) {
     global $baseprgm;
     system ("(echo \"######## Calcul lance depuis l interface WEB ########\";echo $text;date) >>".$baseprgm."/make.log" );
 }
+
+function getmicrotime()
+{ 
+    list($usec, $sec) = explode(" ", microtime());
+    return ((float)$usec + (float)$sec);
+}
+?>

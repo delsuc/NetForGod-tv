@@ -135,12 +135,12 @@ help:
 # c'est ici que l'on défini les dépendances
 
 #  pour tout faire
-.PHONY: all
-all:
-	$(MAKE) -C $(VIDEOdir) -f $(MAKEdir)/Makefile _all
+# .PHONY: all
+# all:
+	# $(MAKE) -C $(VIDEOdir) -f $(MAKEdir)/Makefile _all
 
-.PHONY: _all
-_all: link index 
+.PHONY: all
+all: link index 
 
 # pour créer localement les pages .html ( appelé par 'all')
 # crée les *.avi en dépendance

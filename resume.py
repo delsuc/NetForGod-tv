@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-Pour écrire la page du diaporama
+Pour écrire la page du résumé
 
-Takes JPG images in a "image" directory
-builds tumbnails in thumbs/
-creates a gallery.xml file for simpleviewer.swf
-creates a diaporama.html file to display it
 
 """
 from FOIlib import *

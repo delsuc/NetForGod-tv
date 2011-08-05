@@ -165,8 +165,14 @@ function click_blank($video)  {
     return "<a href=\"$urldivx/$video\" target=\"_blank\">$video</a>";
 }
 
+function est_public($video) {
+    # vraie si la video est public dans la liste VOD
+    global $basevideos;
+    return (file_exists("$basevideos/$video/public"));
+}
+
 function est_cachee($video) {
-    # vraie si la video est cach�e dans la liste VOD
+    # vraie si la video est cachée dans la liste VOD
     global $basevideos;
     return (! file_exists("$basevideos/$video/public"));
 }

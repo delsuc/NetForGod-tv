@@ -1,0 +1,36 @@
+Deploiment
+
+FOI_prgm/
+        doit.sh
+        Makefile
+        xml_parse.py
+        diaporama.py
+        do_tele.py
+        FOIlib.py
+        langues.py
+        presentation.py
+        resume.py
+        tmpl/
+    
+publique :            
+VOD
+
+HD
+
+videos
+
+js
+css
+html
+s
+
+semi-prive
+prgm
+
+pas de blanc dans les noms de fichiers !
+fabriquer langues.js
+fabriquer langues.php
+fabriquer configuration.php
+http://www.airtightinteractive.com/simpleviewer/ viewer.swf
+jw_flvplayer.swf
+

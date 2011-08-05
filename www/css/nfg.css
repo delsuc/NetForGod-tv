@@ -34,13 +34,13 @@ left:0px;
   font-size: 16px;
 }
 .bd-gauche {
-  background-image: url(images/deg_35px_fonce.jpg);
+  background-image: url(/images/deg_35px_fonce.jpg);
   float: left;
   width: 650px;
 	text-align: center;
 }
 .bd-droit {
-  background-image: url(images/deg_35px_fonce.jpg);
+  background-image: url(/images/deg_35px_fonce.jpg);
   float: right;
   width: 148px;
 	text-align: center;
@@ -73,7 +73,7 @@ left:0px;
   width: 400px;
   height: 270px;
   font-size: 24px;
-  background: #65677e url(images/deg_270px.jpg) repeat-x;
+  background: #65677e url(/images/deg_270px.jpg) repeat-x;
   background-color: #000;
 }
 .langues {
@@ -108,7 +108,7 @@ a:hover {color: #fff; }
   margin: auto;
   height:72px;
   color: #fff;
-  background: #000 url(images/deg_72px) repeat-x;
+  background: #000 url(/images/deg_72px) repeat-x;
 }
 .tbemission {
   font-size: 12px;
@@ -120,8 +120,8 @@ a:hover {color: #fff; }
   color: #fff;
   font-size: 12px;
 }
-.tdemission, .tdemissiong, .tdemissiond {height:160px; background-image: url(images/deg_186px.jpg); }
-.tdemission_sm, .tdemissiong_sm, .tdemissiond_sm {height:72px; background-image: url(images/deg_72px.jpg); }
+.tdemission, .tdemissiong, .tdemissiond {height:160px; background-image: url(/images/deg_186px.jpg); }
+.tdemission_sm, .tdemissiong_sm, .tdemissiond_sm {height:72px; background-image: url(/images/deg_72px.jpg); }
 .tdemissiong, .tdemissiong_sm {
   float:left;
 }

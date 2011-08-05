@@ -32,7 +32,7 @@ function PresMoisLangue(mois,lang) {
 	var html = '<p class="titre-mois">' + Atitre[mois] + "</p>";
 	var xmldt
 	var xmlhttp =  new XMLHttpRequest();
-	xmlhttp.open('GET', 'clic.php', true);
+	xmlhttp.open('GET', '/s/clic.php', true);
 	xmlhttp.onreadystatechange = function() { if (xmlhttp.readyState == 4) { xmldt=xmlhttp.responseXML.getElementsByTagName('heure')[0] } }
 	xmlhttp.send(null);
 	li = langue[lang];
@@ -73,8 +73,8 @@ function PresMoisLangue(mois,lang) {
 function CalLangue(mois,lang){
 	var langue=Alangue[mois].split(" ");
 	var lg = langue[lang];
-	var vid = Aflv[mois]+ "/" + lg + "_divx.flv"
-	var aff = Aflv[mois]+ "/affiche.jpg";
+	var vid = "/VOD/" + Aflv[mois]+ "/" + lg + "_divx.flv"
+	var aff = "/VOD/" + Aflv[mois]+ "/affiche.jpg";
 	var s1 = new SWFObject("/s/jw_flvplayer.swf","single","352","287","7");
 	s1.addParam("allowfullscreen","true");
 	s1.addVariable("file",vid);

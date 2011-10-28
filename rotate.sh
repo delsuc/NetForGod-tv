@@ -3,6 +3,8 @@
 
 NLOG=20
 
+cd logs
+
 rm -f make.log.$NLOG.gz
 
 for (( i = $(($NLOG)); i >1; i-- )); do

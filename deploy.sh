@@ -3,7 +3,6 @@
 # This scripts creates the required directories and copy the file into the live site 
 . configuration.sh
 
-
 # create directories
 # first local for logs
 mkdir -p logs
@@ -20,4 +19,7 @@ for i in css js prgm s; do
     mkdir -p $WEBROOT/$i
     cp www/$i/* $WEBROOT/$i
 done
+
+# finally, instal crontab
+crontab crontab_eg
 

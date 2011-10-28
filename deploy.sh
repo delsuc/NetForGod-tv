@@ -1,7 +1,12 @@
 #!/bin/sh
 
-# This scripts creates the required directories and copy the file into the live site 
+echo "This scripts creates the required directories and copy the file into the live site" 
 . configuration.sh
+
+set -v on
+set -x on
+# clean left-overs
+rm *.pyc
 
 # create directories
 # first local for logs
@@ -22,4 +27,3 @@ done
 
 # finally, instal crontab
 crontab crontab_eg
-

@@ -149,8 +149,8 @@ all: link index
 index: 
 	@for dir in $(foiDIR); \
 	do \
-		($(MAKE) -f $(MAKEdir)/Makefile -C $$dir lpages); \
 		($(MAKE) -f $(MAKEdir)/Makefile -C $$dir lFLV); \
+		($(MAKE) -f $(MAKEdir)/Makefile -C $$dir lpages); \
 	done
 
 
@@ -190,14 +190,9 @@ link:
 #	   -ss 	`python $(MAKEdir)/xml_parse.py $(dir $@)parametres.xml start_at 0` \
 #	    $(VIDEOFLAG2)  $(AUDIOFLAG) $(FILEFLAG) $*divx_700.flv
 
-# lpages : toutes les pages html locales
+# lpages : toutes les pages locales : html et DivX
 .PHONY: lpages
 lpages: diaporama.html resume.html presentation.html
-
-# construit la page html pour le download
-# PLUS UTILISE'
-#index.html:  $(localDIVX) $(localAffiche) $(localTi)  parametres.xml .htaccess
-#	python $(MAKEdir)/do_tele.py .
 
 # construit le diaporama
 diaporama.html : $(localIm) $(localTi)
@@ -218,11 +213,10 @@ resume.html : $(localTi) $(localRes)
 parametres.xml :
 	cp $(MAKEdir)/parametres.xml parametres.xml
 
-# force le calcul des FLV locaux, permet de séparer cette regle de la précédente, et de produire la page de téléchargement avant de calculer le flv
-# sinon, il suffirait de dire que index.html dépend de $(localFLV)
-# voir index:
+# force le calcul des FLV locaux, permet de séparer cette regle de lpage
+# $(localDIVX) sont mentionnés ici, car sinon ils sont considérés comme  fichiers intermédiaires et effacés à la fin du calcul
 .PHONY: lFLV
-lFLV: $(localFLV) parametres.xml
+lFLV: $(localFLV) $(localDIVX) parametres.xml
 
 ###################################################
 # regles pour le debogage

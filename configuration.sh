@@ -2,7 +2,7 @@
 
 #######################################
 # choose debug mode, comment when in production !
-export DEBUG_MODE=1
+export DEBUG_MODE=0
 
 #######################################
 # name of the WEB site :

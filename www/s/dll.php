@@ -115,16 +115,14 @@ computing ...
 <p style="text-align:center"> FRATERNITÉ ŒCUMÉNIQUE INTERNATIONALE - - NET FOR GOD - - INTERNATIONAL ECUMENICAL FRATERNITY </p>
 <?php
 // speed-test from http://jan.moesen.nu/code/php/speedtest/index.php
-function getmicrotime()
-{    list($usec, $sec) = explode(" ", microtime());    return ((float)$usec + (float)$sec);}
 $numKB=1000;
 flush();
-$nlLength = strlen("
+$nlLength = strlen(" 
 ");
 echo "<!--";
 $timeStart = getmicrotime();
 for ($i = 0; $i < $numKB; $i++)
-{    echo str_pad('', 1024 - $nlLength, '/*\*') . "
+{    echo str_pad('', 1024 - $nlLength, '/*\*') . " 
 ";   flush(); }
 $timeEnd = getmicrotime();
 $timeDiff = $timeEnd - $timeStart;

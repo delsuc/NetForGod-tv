@@ -19,45 +19,43 @@ debug = 0 # mettre à 1 pour debugger, le nom des fichiers de sortie est changé
 
 class Config(object):
     """Config is a holder for configuration variables"""
-    pass
+    def __init__(self):
+        self.debug = debug
+        #le nom des fichiers de sortie
+        if debug:
+            self.page_name = "indexd.html"
+            self.page_name_en = "indexd_en.html"
+            self.liste_name = "listed.html"
+            self.liste_name_en = "listed_en.html"
+        else:
+            self.page_name = "index.html"
+            self.page_name_en = "index_en.html"
+            self.liste_name = "liste.html"
+            self.liste_name_en = "liste_en.html"
 
-config = Config()
-config.debug = debug
-#le nom des fichiers de sortie
-if debug:
-    config.page_name = "indexd.html"
-    config.page_name_en = "indexd_en.html"
-    config.liste_name = "listed.html"
-    config.liste_name_en = "listed_en.html"
-else:
-    config.page_name = "index.html"
-    config.page_name_en = "index_en.html"
-    config.liste_name = "liste.html"
-    config.liste_name_en = "liste_en.html"
+        #le program fait un cd ici avant de commencer:
+        try:
+            self.working_dir = os.environ["VODdir"]
+        except KeyError:
+            raise Exception("the environment variable VODdir should be set before running, see configuration.sh")
+        # la valeur est effacé au lancement par argv[0]
+        # toutes les adresses sont ensuite relatives à cette adresse
 
-#le program fait un cd ici avant de commencer:
-try:
-    config.working_dir = os.environ["VODdir"]
-except KeyError:
-    raise Exception("the environment variable VODdir should be set before running, see configuration.sh")
-# la valeur est effacé au lancement par argv[0]
-# toutes les adresses sont ensuite relatives à cette adresse
+        try:
+            self.video_dir = os.environ["VIDEOdir"]
+        except KeyError:
+            raise Exception("the environment variable VIDEOdir should be set before running, see configuration.sh")
+        # la valeur est effacé au lancement par argv[0]
+        # toutes les adresses sont ensuite relatives à cette adresse
 
-try:
-    config.video_dir = os.environ["VIDEOdir"]
-except KeyError:
-    raise Exception("the environment variable VIDEOdir should be set before running, see configuration.sh")
-# la valeur est effacé au lancement par argv[0]
-# toutes les adresses sont ensuite relatives à cette adresse
+        #là où l'on trouve les fichiers annexes
+        try:
+            self.PrgmDir = os.environ["MAKEdir"]
+        except KeyError:
+            raise Exception("the environment variable MAKEdir should be set before running, see configuration.sh")
+        # html templates
 
-#là où l'on trouve les fichiers annexes
-try:
-    config.PrgmDir = os.environ["MAKEdir"]
-except KeyError:
-    raise Exception("the environment variable MAKEdir should be set before running, see configuration.sh")
-# html templates
-
-config.TmplDir = os.path.join(config.PrgmDir, "tmpl")
+        self.TmplDir = os.path.join(self.PrgmDir, "tmpl")
 
 
 
@@ -65,7 +63,7 @@ config.TmplDir = os.path.join(config.PrgmDir, "tmpl")
 # Fait le travail
 def main(config):
     try:
-        config.working_dir = sys.argv[1]
+        config.working_dir = sys.argv[1]        # call line arguments, if present, overload default dir
     except:
         pass
     os.chdir(config.working_dir)
@@ -90,5 +88,5 @@ def main(config):
     return 0
 
 if __name__ == "__main__":
-	sys.exit(main(config))
+    sys.exit( main( Config() ) )
 

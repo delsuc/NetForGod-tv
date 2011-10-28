@@ -1,4 +1,5 @@
 # utility to rate all python code
+# obsolete - use QC.py rather
 for i in *.py; do
   echo $i
   pylint -f text $i > TMPFILE

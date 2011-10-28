@@ -192,7 +192,7 @@ link:
 
 # lpages : toutes les pages html locales
 .PHONY: lpages
-lpages:  index.html diaporama.html resume.html presentation.html
+lpages: diaporama.html resume.html presentation.html
 
 # construit la page html pour le download
 # PLUS UTILISE'

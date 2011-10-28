@@ -173,7 +173,7 @@ def html(fichier):
                     break
         fichier.writelines(page%vars())
     except: # something went wrong
-	print traceback.print_exc()
+        print traceback.print_exc()
         fichier.writelines(page_wrong)
         
 def push_php():

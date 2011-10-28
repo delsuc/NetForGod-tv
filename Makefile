@@ -195,8 +195,9 @@ link:
 lpages:  index.html diaporama.html resume.html presentation.html
 
 # construit la page html pour le download
-index.html:  $(localDIVX) $(localAffiche) $(localTi)  parametres.xml .htaccess
-	python $(MAKEdir)/do_tele.py .
+# PLUS UTILISE'
+#index.html:  $(localDIVX) $(localAffiche) $(localTi)  parametres.xml .htaccess
+#	python $(MAKEdir)/do_tele.py .
 
 # construit le diaporama
 diaporama.html : $(localIm) $(localTi)

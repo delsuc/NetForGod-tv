@@ -119,7 +119,7 @@ a { text-decoration: none;}
 </STYLE>
 <script type="text/javascript">
 function diapo() {
-               var fo = new SWFObject("/js/viewer.swf", "viewer", "100%%", "700", "7", "#181818");
+               var fo = new SWFObject("/s/viewer.swf", "viewer", "100%%", "700", "7", "#181818");
                fo.addVariable("preloaderColor", "0xffffff");
                fo.addVariable("xmlDataPath", "gallery_%(lang)s.xml");
                fo.write("flashcontent");

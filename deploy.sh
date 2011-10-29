@@ -1,11 +1,14 @@
 #!/bin/sh
-
 echo "This scripts creates the required directories and copy the file into the live site" 
+set -v on
+
 . configuration.sh
 
-set -v on
 # clean left-overs
 rm *.pyc
+
+# create configuration.php from configuration.sh
+python config_mirror.py
 
 # create directories
 # first local for logs
@@ -24,6 +27,6 @@ for i in css js prgm s; do
     cp www/$i/* $WEBROOT/$i
 done
 
-# finally, instal crontab - 
+# finally, instal crontab, but before save previous ones
 crontab -l > previous_crontab
 tail -n +2 crontab_eg | crontab -

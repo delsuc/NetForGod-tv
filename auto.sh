@@ -4,7 +4,6 @@
 # on commence par dater dans le log
 echo "################## "
 date
-w
 
 # import the configuration
 . configuration.sh

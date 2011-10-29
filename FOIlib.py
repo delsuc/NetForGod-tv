@@ -22,7 +22,7 @@ footer="""
 <li><a href="/media/copyright.html">&copy; C.C.N.</a></li>
 <li>| <a href="http://chemin-neuf.org">La communaut&eacute; du Chemin-Neuf </a> | </li>
 <li><a href="/media/mentions.html">mentions l&eacute;gales</a> | </li>
-<li><a href="mailto:netforgod@chemin-neuf.org?cc=nfg.webmaster@gmail.com&subject=depuis le site netforgod.tv" >contactez-nous</a> | </li>
+<li><a href="mailto:netforgod@chemin-neuf.org?cc=nfg.webmaster@gmail.com&amp;subject=depuis le site netforgod.tv" >contactez-nous</a> | </li>
 <li>Ce site est optimis&eacute; pour Firefox</li>
 </ul></div></div></div></body></html>
 """
@@ -453,8 +453,8 @@ function openWindow(url,name)
 <div class="bd-droit">    %(link)s    </div>
 </div>
 <div id="page-centree" style="font-size: 16px">
-<object type="application/x-shockwave-flash" width="352" height="288" wmode="transparent" data="/js/flvplayer.swf?file=%(file)s&showdigits=true">
-<param name="movie" value="/js/flvplayer.swf?file=%(file)s&showdigits=true" />
+<object type="application/x-shockwave-flash" width="352" height="288" wmode="transparent" data="/js/flvplayer.swf?file=%(file)s&amp;showdigits=true">
+<param name="movie" value="/js/flvplayer.swf?file=%(file)s&amp;showdigits=true" />
 <param name="wmode" value="transparent"/>
 </object>
 %(resume)s
@@ -770,7 +770,7 @@ class VodPage:
         # base html de la case pour une emission
         base="""
         <div class="ltfilm">
-        <a href="/s/%(perm)s?dt=%(dt)s&lg=%(langue)s"><img border="0" class="affiche-2" alt="affiche" src="%(affiche)s"/></a>
+        <a href="/s/%(perm)s?dt=%(dt)s&amp;lg=%(langue)s"><img border="0" class="affiche-2" alt="affiche" src="%(affiche)s"/></a>
         <p class="date-lt">%(date)s</p>
         <p class="lttitre">%(titre)s</p>
         </div>

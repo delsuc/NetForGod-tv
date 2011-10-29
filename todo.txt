@@ -1,3 +1,4 @@
+- attendre de mettre w3C le débugage
 basculer index_res.html à la racine, et enlever index.php
 verifier .htaccess partout
 mirror de configuration.sh vers .php
@@ -14,11 +15,6 @@ page en français :
 - le dernier film n'est pas le bon c'est Charles de Foucoud qui s'est mis en premier
 -les diaporamas des  film n'apparaissent pas : écran gris rien ne se télécharge
 - pas d'image, affiche pour la reine de Hongrie
--ccn : ne trouve pas la page copyright : http://www.netforgod.tv/VOD/media/copyright.html
-- mentions légales : ne trouve pas la page http://www.netforgod.tv/VOD/media/
-dans la nouvelle page pas mention légale  il faudra changer le nom de l'hébergeur
-- attendre de mettre w3C le débugage
-- pour la page contact, elle fonctionne mais c'est dommage que les adresses mails soient en clairs
 page en français liste :
 même chose que la page dynamique
 dans les deux sites, il n'y a pas d'accès au diaporama pour la page en liste

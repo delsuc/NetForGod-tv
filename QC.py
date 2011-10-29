@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # encoding: utf-8
 """
 This programm run pylint on all python files managed by mercurial in a directory.

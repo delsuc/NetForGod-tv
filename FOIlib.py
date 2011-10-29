@@ -30,16 +30,15 @@ footer="""
 def chop_nl(list_of_strings):
     """removes \n at the end of all lines"""
     for i in range(len(list_of_strings)):
-            list_of_strings[i] = list_of_strings[i].rstrip("\n")
+        list_of_strings[i] = list_of_strings[i].rstrip("\n")
 
 def clean(st):
-   """nettoie les characteres interdit en HTML"""
-   return st.replace("&","&amp;").replace("'","&#x27;").replace('"',"&quot;").replace("\n","<br/>").replace("\r","")
+    """nettoie les characteres interdit en HTML"""
+    return st.replace("&","&amp;").replace("'","&#x27;").replace('"',"&quot;").replace("\n","<br/>").replace("\r","")
 
 def current_title(dir):
     from os.path import join
     """ lit les fichiers titre_EN.txt et titre_FR.txt """
-    import glob
     tis = glob.glob(join(dir,"textes","titre_*.txt"))
     (ti_FR,ti_EN) = (("pas de titre",),("no title",))
     for f in tis:
@@ -52,9 +51,8 @@ def current_title(dir):
     return((ti_FR,ti_EN))
 
 def current_resume(dir):
-    from os.path import join
     """ lit les fichiers resume_EN.txt et resume_FR.txt """
-    import glob
+    from os.path import join
     tis = glob.glob(join(dir,"textes","resume_*.txt"))
     (ti_FR,ti_EN) = ("pas de resume","no synopsis")
     for f in tis:
@@ -74,9 +72,7 @@ def current_date_2():
     return(an,mois)
 
 def current_date(dir):
-    import re
     import time
-    import os
     ici = op.basename(op.abspath(dir))
     try:
         [(annee,mois)] = re.findall("FOI_(\d\d)_(\d\d)",ici)
@@ -88,9 +84,7 @@ def current_date(dir):
     return(int(annee),int(mois))
 
 def read_dir(dir,template="*"):
-    from os.path import join
-    import glob
-    divx = glob.glob(join(dir,template))
+    divx = glob.glob(op.join(dir,template))
     return divx
 
 
@@ -99,7 +93,6 @@ class diaporama:
     """permet de créer des diaporama"""
 
     def __init__(self, dir,lang="FR"):
-        import glob,os
         try:
             import Image    # Python Image Library is required - see 
         except:
@@ -191,7 +184,7 @@ pageTracker._trackPageview();
         scale them to maxsiz
         creates thumbnails and save them in self.dir/thumbs/*
         """
-        import glob,os,Image
+        import Image
         if not op.exists(op.join(self.dir,"thumbs")):
             os.mkdir(op.join(self.dir,"thumbs"))
         for ii in glob.glob(op.join(self.dir,"images","photo*.jpg")) :
@@ -212,7 +205,6 @@ pageTracker._trackPageview();
         takes photos in images/photoxx.jpg and captions in textes/photoxx_LL.jpg
         and create gallery_LL.xml where LL is the language code
         """
-        import glob, os
 
         XML=file(op.join(self.dir,"gallery_"+self.lang+".xml"),"w")
         (titre_fr,titre_en)=current_title(self.dir)
@@ -241,29 +233,28 @@ pageTracker._trackPageview();
         f1 =  image.replace(".jpg","_"+self.lang+".txt")
         f2 =  op.join(op.dirname(image),"legendes_"+self.lang+".txt")
         try:
-                f=file(f1)
-                text=" ".join(f.readlines()).strip(" \n")
-                f.close()
+            f=file(f1)
+            text=" ".join(f.readlines()).strip(" \n")
+            f.close()
         except:
+            text = ""
+        if text == "":
+            prefix = op.basename(image).replace(".jpg"," : ")   # photoxx : 
+            try:
+                f=file(f2)
+                for l in f:
+                    if l.startswith(prefix):
+                        text = l.replace(prefix,"")
+                        break
+                f.close()
+            except:
                 text = ""
         if text == "":
-                prefix = op.basename(image).replace(".jpg"," : ")   # photoxx : 
-                try:
-                    f=file(f2)
-                    for l in f:
-                      if l.startswith(prefix):
-                         text = l.replace(prefix,"")
-                         break
-                    f.close()
-                except:
-                    text = ""
-        if text == "":
-                print "pas de légende en %s pour %s dans %s "%(self.lang,image,op.abspath(self.dir))
+            print "pas de légende en %s pour %s dans %s "%(self.lang,image,op.abspath(self.dir))
         return text
 
     def do_html(self,lang="FR"):
         """docstring for do_html"""
-        import os
         formvar={}
         formvar["link"]=self.link
         formvar["mois"]=self.nomMois
@@ -278,7 +269,6 @@ pageTracker._trackPageview();
 class presentation:
     """permet de créer des page de presentation"""
     def __init__(self, dir,lang="FR"):
-        import glob,os
         self.dir = dir
         (self.annee,self.mois)=current_date(self.dir)
         self.setLang(lang)
@@ -375,7 +365,6 @@ function openWindow(url,name)
 class resume:
     """permet de créer des pages de resume"""
     def __init__(self, dir,lang="FR"):
-        import glob,os
         self.dir = dir
         imlist = glob.glob(op.join(self.dir,"textes","resume_*.txt"))
         self.empty = len(imlist)==0 # tells that there is no resume available
@@ -525,7 +514,6 @@ function openWindow(url,name)
 
 class VodPage:
     """ Cette classe construit les pages principales de VOD """
-    import os, sys
     def __init__(self, config, langue="FR"):
         self.langue=langue
         self.config = config
@@ -569,10 +557,10 @@ class VodPage:
         flv = str(self.flv_list).replace('[','').replace(']','')
         titre = ""
         for i in self.titre_list:
-                if titre == "":
-                        titre = "'" + i + "'"
-                else:
-                        titre = titre + ", '" + i + "'"
+            if titre == "":
+                titre = "'" + i + "'"
+            else:
+                titre = titre + ", '" + i + "'"
         langs = repr(self.langues_list).replace('[','').replace(']','')
         if self.langue == "FR":
             autrepage = self.config.page_name_en
@@ -600,10 +588,10 @@ class VodPage:
         flv = str(self.flv_list).replace('[','').replace(']','')
         titre = ""
         for i in self.titre_list:
-                if titre == "":
-                        titre = "'" + i + "'"
-                else:
-                        titre = titre + ", '" + i + "'"
+            if titre == "":
+                titre = "'" + i + "'"
+            else:
+                titre = titre + ", '" + i + "'"
         langs = repr(self.langues_list).replace('[','').replace(']','')
         if self.langue == "FR":
             autrepage = self.config.liste_name_en
@@ -666,19 +654,19 @@ class VodPage:
             if not op.islink(new_flv):
                 print "LINK", flv, new_flv
                 try: 
-                  os.symlink(flv, new_flv)
+                    os.symlink(flv, new_flv)
                 except:
-                  raise "Probleme avec ln -s %s %s"%(flv, new_flv)
+                    raise "Probleme avec ln -s %s %s"%(flv, new_flv)
         # affiche, textes, images
         for F in ("affiche.jpg", "textes", "images", "thumbs", "presentation.html","presentation_EN.html","diaporama.html","diaporama_FR.html","diaporama_EN.html","resume.html","resume_FR.html","resume_EN.html","gallery_EN.xml","gallery_FR.xml"):
             old_F=op.join(source,F)
             new_F=op.join(self.config.working_dir,dir,F)
             if not op.islink(new_F) and op.exists(old_F):
-               print "LINK", old_F, new_F
-               try:
-                   os.symlink(old_F, new_F)
-               except:
-                   print "probleme avec ln -s %s %s"%(old_F, new_F)
+                print "LINK", old_F, new_F
+                try:
+                    os.symlink(old_F, new_F)
+                except:
+                    print "probleme avec ln -s %s %s"%(old_F, new_F)
         return dir
 
     ###################################################################################
@@ -716,14 +704,14 @@ class VodPage:
             for j in langues.ordrelangues.split():    # sur toutes les langues
                 for k in f:     # sur tous les fichiers
                     try:
-                       [ll1] = re.findall("([A-Z][A-Z]+)_divx",  k)
-                       if j == ll1:
-                           if ll=="":
-                               ll=ll1
-                           else:
-                               ll = ll+" "+ll1
+                        [ll1] = re.findall("([A-Z][A-Z]+)_divx",  k)
+                        if j == ll1:
+                            if ll=="":
+                                ll=ll1
+                            else:
+                                ll = ll+" "+ll1
                     except:
-                       if self.debug: print "langue inconnue: ",k
+                        if self.debug: print "langue inconnue: ",k
             l.append(ll)
         return(l)
     ###################################################################################
@@ -837,5 +825,5 @@ class VodPage:
         return ((titre,affiche,date))
 
 if __name__ == "main":
-      print "cette bibliothèque doit être importée pour être utilisée"
+    print "cette bibliothèque doit être importée pour être utilisée"
 

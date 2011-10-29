@@ -9,20 +9,20 @@ creates a gallery.xml file for simpleviewer.swf
 creates a diaporama.html file to display it
 
 """
-from FOIlib import *
-import os
+from FOIlib import diaporama
+import sys
 
 def main():
     try:
         c = sys.argv[1]
     except:
-        raise """\
+        raise Exception("""\
 La syntaxe normale est :
 python diaporama.py video_dir
 
 le programme construit la page dans video_dir
-"""
-    D=diaporama(c)
+""")
+    D = diaporama(c)
     if not D.empty:
         D.images()
         D.setLang("FR")
@@ -33,7 +33,7 @@ le programme construit la page dans video_dir
         D.do_html()
     else:
     #    print "pas de diaporama pour ",c
-	pass
+        pass
 
 if __name__ == "__main__":
     main()

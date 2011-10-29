@@ -25,7 +25,7 @@ fi
 if ! [ -f FOI-working.lock ]; then
     touch FOI-working.lock
     # choose the options
-    if [ $DEBUG_MODE ]; then
+    if [ $DEBUG_MODE == 1 ]; then
         ./domake.sh --no-keep-going --warn-undefined-variables --print-directory
     else
         ./domake.sh --silent --keep-going --no-print-directory

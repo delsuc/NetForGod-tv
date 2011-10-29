@@ -4,7 +4,6 @@ echo "This scripts creates the required directories and copy the file into the l
 . configuration.sh
 
 set -v on
-set -x on
 # clean left-overs
 rm *.pyc
 
@@ -25,5 +24,6 @@ for i in css js prgm s; do
     cp www/$i/* $WEBROOT/$i
 done
 
-# finally, instal crontab
-crontab crontab_eg
+# finally, instal crontab - 
+crontab -l > previous_crontab
+tail -n +2 crontab_eg | crontab -

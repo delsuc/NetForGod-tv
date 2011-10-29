@@ -1,0 +1,8 @@
+# This file is to be copied to crontab using crontab -e
+# m h  dom mon dow   command
+
+# call auto.sh every hours
+30 */1  * * *  cd /home/netforgod/FOI_prgm; ./auto.sh >>  logs/make.log 2>&1
+
+# call rotate.sh once per month during the night
+20  1   1 * *  cd /home/netforgod/FOI_prgm; ./rotate.sh >> logs/rotate.log 2>&1

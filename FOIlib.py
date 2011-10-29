@@ -19,9 +19,9 @@ footer="""
 <BR CLEAR=ALL>
 <div id="pied">
 <ul>
-<li><a href="copyright.html">&copy; C.C.N.</a></li>
+<li><a href="/media/copyright.html">&copy; C.C.N.</a></li>
 <li>| <a href="http://chemin-neuf.org">La communaut&eacute; du Chemin-Neuf </a> | </li>
-<li><a href="/mentions.html">mentions l&eacute;gales</a> | </li>
+<li><a href="/media/mentions.html">mentions l&eacute;gales</a> | </li>
 <li><a href="mailto:netforgod@chemin-neuf.org?cc=nfg.webmaster@gmail.com&subject=depuis le site netforgod.tv" >contactez-nous</a> | </li>
 <li>Ce site est optimis&eacute; pour Firefox</li>
 </ul></div></div></div></body></html>
@@ -303,7 +303,7 @@ function openWindow(url,name)
 %(resume)s
 %(diapo)s
 <hr width="30%%">
-<a style="font-size: 16px" href="/frat.html">%(discover)s</A> <br>
+<a style="font-size: 16px" href="/media/frat.html">%(discover)s</A> <br>
 <hr width="30%%">
 """+footer
 
@@ -460,7 +460,7 @@ function openWindow(url,name)
 %(resume)s
 %(diapo)s
 <hr width="30%%">
-<a style="font-size: 16px" href="/frat.html">%(discover)s</A> <br>
+<a style="font-size: 16px" href="/media/frat.html">%(discover)s</A> <br>
 <hr width="30%%">
 <BR CLEAR=ALL>
 <div id="pied">

@@ -5,6 +5,7 @@
 ?>
     
     <H1>Documentation pour F.O.I.</H1>
+    <H1><em>Cette doc doit être réécrite dans la nouvelle version</em></H1>
     <hr width="30%">
     <h2>Les pages d'aministration</H2>
     Les pages suivantes sont disponibles:
@@ -239,6 +240,7 @@
         </pre>
     dans ce cas, le calcul est lancé au moment même.
     On gagne en moyenne une demi-heure avec ce système.
-    <p>
+    </p>
     <hr width="30%">
-
+</body>
+</html>

@@ -1,4 +1,6 @@
 # This file contains all the configuration parameters for the FOI project
+# Any modification of this file should be mirrored in  $(WEBROOT)/s/configuration.php
+# by calling mirror.sh
 
 #######################################
 # choose debug mode, comment when in production !

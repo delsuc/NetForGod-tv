@@ -35,9 +35,8 @@ if ($debug != '' ){
     echo "date de validité : $valid[mday] $valid[mon] $valid[year]<br/>";
     $valid = getdate(time());
     echo "aujourd'hui : $valid[mday] $valid[mon] $valid[year]<br/>";
-    if ($date*3600 < time()) { echo "LIEN PERIME !<br/>";}
+    echo "$erreur<br/>";
     echo "<hr/>";
-    exit();
 }
 
 if ($erreur == ''){
@@ -45,6 +44,10 @@ if ($erreur == ''){
     $debit = 1100;                                      # debit en kbit/sec
     $duree = $taille*1024*8/$debit/60;       # durée du film
 
+    if ($debug != '' ){
+        echo "taille du fichier $taille Mo<br/>";
+        echo "duree du film : $duree mn<br/>";
+    }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="en,fr" xml:lang="en,fr" xmlns="http://www.w3.org/1999/xhtml">

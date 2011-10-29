@@ -282,12 +282,39 @@ function travail_bloque() {
 function makelog($text) {
     # rajoute une entrée dans le log file
     global $baseprgm;
-    system ("(echo \"######## Calcul lance depuis l interface WEB ########\";echo $text;date) >>".$baseprgm."/make.log" );
+    system ("(echo \"######## Calcul lance depuis l interface WEB ########\";echo $text;date) >>".$baseprgm."/logs/make.log" );
 }
 
 function getmicrotime()
 { 
-    list($usec, $sec) = explode(" ", microtime());
-    return ((float)$usec + (float)$sec);
+    $timearray = explode(" ", microtime());
+    return ($timearray[1] + $timearray[0]);
 }
+
+function measure_kbps()
+{
+  //compute amount of data sent in one sec.  from SimonB : http://fr.php.net/manual/en/function.microtime.php
+
+  //Prepare a 1kB chunk to send
+  for ($i=0; $i<1023; $i++) $chunk.='A';
+  $chunk.='\n';
+  //Hide what happens next
+  echo "<!-- ";
+  //Keep sending 1 kB chunks for 1 second
+  flush();
+  $count=0;
+  $starttime = getmicrotime();
+  do  {
+    echo $chunk;
+    $count++;
+    flush();
+    $endtime = micro_time();
+    $totaltime = $endtime - $starttime;
+    $totaltime = round($totaltime,5);
+  } while ($totaltime < 1);
+  echo " -->\n";
+  //Return how many kb were sent
+  return ($count * 8);
+}
+
 ?>

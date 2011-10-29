@@ -29,12 +29,13 @@
 # commandes pour les codeurs
 
 # addresse de FFMPEG
-FFMPEG =  nice /home/netforgod/USR/bin/ffmpeg 
+#FFMPEG =  nice /home/netforgod/USR/bin/ffmpeg 
+# is given in configure.sh
 #-benchmark
 #FFMPEG = echo
 
 # la notice de copyright (apparait dans les meta informations)
-COPYRIGHT = NetForGod
+#COPYRIGHT = NetForGod
 # le titre de la video (apparait dans les meta informations)
 TITLE = video NFG
 # la date

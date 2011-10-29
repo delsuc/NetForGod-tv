@@ -11,7 +11,7 @@
 	<p><i>Ce projet est encore de développement, tout n'est pas actif'</i></p>
 
 	<hr/>
-	<H2>Vidéos disponibles:</H2>
+	<H2>Vidéos disponibles: <I><?php echo count(list_video()) ?> films multilangues en tout</I></H2>
 			<table border="1" cellspacing="5" cellpadding="5" style="text-align:center">
 				<tr><th><i>Vidéo<br>disponibles</i></th>
 				<th><i>titre</i></th>
@@ -24,12 +24,16 @@
 <td>2</td><td>-</td><td>-</td>
                                 </tr>
 			<?php
+			$cache = 0;
+			$visi = 0;
+			$divx = 0;
 			foreach (list_video() as $file) {
 				$titre=titre($file);
 				$titre_en = titre_en($file);
 				$cl = click_blank($file);
 				echo "<tr><td class=\"ex\">$cl</td><td>$titre<br/><i>$titre_en</i></td>";    # nom de la video
 				$cn = count(list_divx($file));
+				$divx += $cn;
 				echo "<td>$cn</td>";
 //                                $sz=`du -sh $basevideos/$file/`;
  //                               echo "<td>$sz</td>";
@@ -40,32 +44,19 @@
 				}
 				if (est_cachee($file)) {
 					echo "<td>cachée</td>";		# la video est cachée
+					$cache += 1;
 				} else {
 					echo "<td  class=\"ex\">visible</td>";
+					$visi += 1;
 				}
 				echo "</tr>";
 			}
 			?>
 			</table>
-			<p></P>
+<p>Ce qui fait <?php
+echo "$visi films visibles et $cache films cachés pour un total de $divx vidéos différentes.";
+?> </p>
 
 <hr/>
-	<h2>Reste à faire</h2>
-	<tr><td><B>Gestion du canal live</B></td>
-		<td>	<hr>
-		</td>
-	</tr>
-LIVE
-		<td>
-			<P>Bascule instantanée sur un canal Live définit</p>
-		</td>
-	</tr>
-ACTUEL
-		<td>
-			<P>définition du programme actuel</p>
-		</td>
-	</tr>
-</table>
-</div>
 </body>
 </html>

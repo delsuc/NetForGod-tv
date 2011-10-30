@@ -27,6 +27,11 @@ for i in css js prgm s; do
     cp www/$i/* $WEBROOT/$i
 done
 
+# create language utilities
+pyrhon langues.py
+mv langues.js www/js
+mv langues.php www/prgm
+
 # finally, instal crontab, but before save previous ones
 crontab -l > previous_crontab
 tail -n +2 crontab_eg | crontab -

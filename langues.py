@@ -7,12 +7,15 @@ copyright Communauté du Chemin-Neuf
 ne pas utiliser sans authorisation
 ATTENTION codage UTF-8 impératif !
 
+pour rajouter une langue, rajouter une entrée dans langues, languages, lang_self et éventuellement résumé
+rajouter son nom à ordrelangues 
+
+Attention:
+si vous voulez garder la compatibilité avec une version antérieur du sit, il faut obligatoirement rajouter A LA FIN de ordrelangues 
 """
 __author__ = "M-A.Delsuc"
-__version__ = "1.2 feb 2009"
-__copy__ = "Communauté du Chemin-Neuf"
-
-import os
+__version__ = "1.3 oct 2011"
+__copy__ = "Communaute du Chemin-Neuf"
 
 # le nom des mois en français
 mois_nom =  [" ","janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"]
@@ -60,11 +63,9 @@ resume = {
 # l'ordre des langues
 ordrelangues = 'FR EN DE ES IT PT HU NL CS SK LV LT PL RU TR HY AR ZH JA VI MOS LN RN MU MG'
 
-def create_js(filename=None):
+def create_js(filename="langues.js"):
     """crée un fichier javascript qui sera utilisable dans les pages WEB"""
     import datetime
-    if not filename:
-        filename = os.environ["WEBROOT"] + "/js/langues.js"
     F=file(filename,'w')
     now = datetime.datetime.now()
     F.writelines("""// Javascript library for handling various foreign languages
@@ -86,6 +87,48 @@ var ResLang = new Object();
             res = resume["FR"]
         F.writelines("ResLang['%s'] = '%s'\n"%(l,res))
     F.close()
+
+def phparray(liste):
+    "concatenate list entries for php"
+    st = "array('{}'".format(liste[0])
+    for l in liste[1:]:
+        st += ", '{}'".format(l)
+    st += ")"
+    return st
+def phpdict(dico):
+    "concatenate dict entries for php"
+    st = "array('{}'=>'{}'".format(*dico.items()[0])
+    for (k,v) in dico.items()[1:]:
+        st += ", '{}'=>'{}'".format(k,v)
+    st += ")"
+    return st
+    
+def create_php(filename="langues.php"):
+    """crée un fichier php qui sera utilisable dans les pages WEB"""
+    import datetime
+    F=file(filename,'w')
+    now = datetime.datetime.now()
+    F.writelines("""<?php
+// library for handling various foreign languages
+// automatically created by langues.py script
+// copyright - M-A Delsuc, Communauté du Chemin-Neuf, do not use without authorization
+// created on %s
+"""%(now))
+    F.writelines("$ordrelangues = "+phparray(ordrelangues.split())+";\n")
+    F.writelines("// le nom des mois en français\n")
+    F.writelines("$mois_nom = "+phparray(mois_nom)+";\n")
+    F.writelines("$mois_nom_court = "+phparray(mois_nom_court)+";\n")
+    F.writelines("// le nom des mois en anglais\n")
+    F.writelines("$month_name = "+phparray(month_name)+";\n")
+    F.writelines("// le nom des langues en français\n")
+    F.writelines("$langues = "+phpdict(langues)+";\n")
+    F.writelines("// le nom des langues en anglais\n")
+    F.writelines("$languages = "+phpdict(languages)+";\n")
+    F.writelines("// le nom des langues le nom des langues dans leur propres langue\n")
+    F.writelines("$lang_self = "+phpdict(lang_self)+";\n")
+    F.writelines("// le mot resume\n")
+    F.writelines("$resume = "+phpdict(resume)+";\n")
+    F.close()
         
 def report():
     """Produit la table des langues utilisées"""
@@ -102,6 +145,8 @@ def report():
 #        print (l,langues[l],languages[l],lang_self[l])
 
 # le code suivant n'est exécuté que si on appelle directement le programme
+# typiquement au moment du deploiment
 if __name__ == '__main__':
     report()
     create_js()
+    create_php()

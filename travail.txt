@@ -1,4 +1,6 @@
 Deploiment
+configuration.sh
+langues.py
 
 FOI_prgm/
         doit.sh
@@ -11,7 +13,7 @@ FOI_prgm/
         presentation.py
         resume.py
         tmpl/
-    
+
 publique :            
 VOD
 

@@ -1,23 +1,16 @@
-- attendre de mettre w3C le débugage
 basculer index_res.html à la racine, et enlever index.php
 verifier .htaccess partout
-mirror de configuration.sh vers .php
 temps estimé de download sur page tele
-conseil sur page tele
 finir deploy (voir travail)
 
 sur saul dans FOI_03_10 il manque video.avi
 
-/media/self.html ?
+generer langues.js
+generer langues.php
 
 Catherine
-page en français :
 - le dernier film n'est pas le bon c'est Charles de Foucoud qui s'est mis en premier
--les diaporamas des  film n'apparaissent pas : écran gris rien ne se télécharge
 - pas d'image, affiche pour la reine de Hongrie
-page en français liste :
-même chose que la page dynamique
-dans les deux sites, il n'y a pas d'accès au diaporama pour la page en liste
 
 dans FOI_03_10 EN* est bidon FR Seulement
 

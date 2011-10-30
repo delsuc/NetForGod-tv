@@ -10,6 +10,11 @@ rm *.pyc
 # create configuration.php from configuration.sh
 python config_mirror.py
 
+# create language utilities
+python langues.py
+mv langues.js www/js
+mv langues.php www/prgm
+
 # create directories
 # first local for logs
 mkdir -p logs
@@ -27,10 +32,6 @@ for i in css js prgm s; do
     cp www/$i/* $WEBROOT/$i
 done
 
-# create language utilities
-pyrhon langues.py
-mv langues.js www/js
-mv langues.php www/prgm
 
 # finally, instal crontab, but before save previous ones
 crontab -l > previous_crontab

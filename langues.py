@@ -90,16 +90,16 @@ var ResLang = new Object();
 
 def phparray(liste):
     "concatenate list entries for php"
-    st = "array('{}'".format(liste[0])
+    st = "array('%s'"%(liste[0])
     for l in liste[1:]:
-        st += ", '{}'".format(l)
+        st += ", '%s'"%(l)
     st += ")"
     return st
 def phpdict(dico):
     "concatenate dict entries for php"
-    st = "array('{}'=>'{}'".format(*dico.items()[0])
+    st = "array('%s'=>'%s'"%(dico.items()[0])
     for (k,v) in dico.items()[1:]:
-        st += ", '{}'=>'{}'".format(k,v)
+        st += ", '%s'=>'%s'"%(k,v)
     st += ")"
     return st
     

@@ -24,8 +24,8 @@ with open("www/prgm/configuration.php",'w') as F:
                 try:
                     v = float(val)
                 except:
-                    val = "'{}'".format(val)    # if not numeral, put into single quotes
-                F.write( "${0} = {1};\n".format(var,val))
+                    val = "'%s'"%(val,)    # if not numeral, put into single quotes
+                F.write( "$%s = %s;\n"%(var,val))
             else:
                 F.write(l+"\n")
     F.write("?>\n")

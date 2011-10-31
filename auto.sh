@@ -18,7 +18,7 @@ fi
 #chmod -R a+w $VODdir/*
 
 # enleve les vieux fichiers non utilises
-./clean.sh
+./remove_old_files.sh
 
 # fabrique tous les fichiers video et les fichiers html
 if ! [ -f FOI-working.lock ]; then

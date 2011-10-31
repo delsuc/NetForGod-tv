@@ -5,12 +5,13 @@ set -v on
 . configuration.sh
 
 # clean left-overs
-rm *.pyc
+./clean-up.sh
 
 # create configuration.php from configuration.sh
 python config_mirror.py
 
 # create language utilities
+
 python langues.py
 # and copy over to work dir
 mv langues.js www/js

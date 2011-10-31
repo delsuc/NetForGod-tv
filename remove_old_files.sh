@@ -1,4 +1,7 @@
-# pour faire de la place sur le disque.
+# remove all .avi files which can be recomputed rapidly from video.avi + langue/mp3
+# FR and EN are always kept
+
+# active can be "True" of "False" (in which case only a message is issued)
 active="False"
 
 . configuration.sh

@@ -12,6 +12,7 @@ python config_mirror.py
 
 # create language utilities
 python langues.py
+# and copy over to work dir
 mv langues.js www/js
 mv langues.php www/prgm
 

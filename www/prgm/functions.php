@@ -27,7 +27,7 @@ $basevod=$VODdir;
 #base de l'URL des VOD
 $urlvod="/VOD";
 #base de l'URL des DIVX
-#$urldivx="/FOI";
+$urldivx="/videos";
 
 #liste des video de type VOD/FOI_xx_xx, déjà triée
 $list_video=array();

@@ -37,9 +37,8 @@ def clean(st):
     return st.replace("&","&amp;").replace("'","&#x27;").replace('"',"&quot;").replace("\n","<br/>").replace("\r","")
 
 def current_title(dir):
-    from os.path import join
     """ lit les fichiers titre_EN.txt et titre_FR.txt """
-    tis = glob.glob(join(dir,"textes","titre_*.txt"))
+    tis = glob.glob(op.join(dir,"textes","titre_*.txt"))
     (ti_FR,ti_EN) = (("pas de titre",),("no title",))
     for f in tis:
         if f.endswith('_FR.txt'):
@@ -66,12 +65,14 @@ def current_resume(dir):
     return((ti_FR,ti_EN))
 
 def current_date_2():
+    "calcule la date d'aujourd'hui (annee,mois)"
     import datetime
     mois = datetime.datetime.today().month
     an = datetime.datetime.today().year
     return(an,mois)
 
 def current_date(dir):
+    "calcule la date du directory donné (annee,mois)"
     import time
     ici = op.basename(op.abspath(dir))
     try:
@@ -84,10 +85,9 @@ def current_date(dir):
     return(int(annee),int(mois))
 
 def read_dir(dir,template="*"):
+    "glob.glob kindof"
     divx = glob.glob(op.join(dir,template))
     return divx
-
-
 
 class diaporama:
     """permet de créer des diaporama"""
@@ -520,12 +520,36 @@ class VodPage:
         self.debug = config.debug
         self.dir = config.video_dir
         self.TmplDir = config.TmplDir
+        self.chmod()
         self.flv_list = self.do_flv_list()
         self.titre_list = self.do_titre_list()
         self.langues_list = self.do_lang_list()
         self.resum_list = self.do_resum_list()
         self.diapo_list = self.do_diapo_list()
 
+    def chmod(self):
+        """
+        passe tout les directories en 666 ainsi que les fichiers premier et public
+        nécessaire pour que l'interface php puisse modifier/créer ces fichiers
+        """
+        import stat
+        if self.debug: print "opening for chmod :",self.dir
+        rw_all = stat.S_IRUSR|stat.S_IWUSR|stat.S_IRGRP|stat.S_IWGRP|stat.S_IROTH|stat.S_IWOTH
+        rwx_all = rw_all | stat.S_IXUSR|stat.S_IXGRP|stat.S_IXOTH
+        for dir in glob.glob(op.join(self.dir,"*")): # pour tout les directory
+            if op.isdir(dir):
+                os.chmod(dir, rwx_all)       # rwx for all
+                if op.isfile(op.join(dir,"public")):   # si je trouve le fichier "public"
+                    try:
+                        os.chmod(op.join(dir,"public"), rw_all)
+                    except:
+                        pass
+                if op.isfile(op.join(dir,"premier")):   # si je trouve le fichier "premier"
+                    try:
+                        os.chmod(op.join(dir,"premier"), rw_all)
+                    except:
+                        pass
+                    
     def html_base_liste(self):
         """charge la base de la page html pour le VOD en mode liste"""
         if (self.langue == "FR"):
@@ -606,10 +630,11 @@ class VodPage:
         """ fabrique la liste des flv dans la langue cible
         cherche dans tous les sous-dossiers de self.dir, un fichier XX_divx.flv
         si le dossier contient un fichier au nom de public, alors l'entrée est rajoutée
-        au passage, crée tous les liens entre self.dir (là où sont vraiment les video) et working_dir (là où sont les pages de visu)
         retourne la liste des dossiers rajoutés dans working_dir
         l'ordre de Cette liste determine l'ordre des videos - par defaut c'est l'ordre anti alphabetique
         si un dossier contient un fichier (vide) "premier" alors il est mis en tete
+
+        au passage, crée tous les liens entre self.dir (là où sont vraiment les video) et working_dir (là où sont les pages de visu)
         """
         try:
             motif = self.langue+"_divx.flv"
@@ -641,16 +666,16 @@ class VodPage:
         return (l1)
     
     ###################################################################################
-    def makelink(self,source,cible):
+    def makelink(self, source, cible):
         """s'assure que tout les liens entres les dossiers source (video) et cible (VOD) sont là"""
         # source : self.dir/MyMovie   -  cible : VOD   -  dir : VOD/MyMovie
-        dir = op.join(cible,op.basename(source))
+        dir = op.join(cible, op.basename(source))
         # create dir
         if not op.isdir(dir):
             os.mkdir(dir)
         # link flvs
         for flv in glob.glob(source+"/*.flv"):
-            new_flv=op.join(dir,op.basename(flv))
+            new_flv = op.join(dir, op.basename(flv))
             if not op.islink(new_flv):
                 print "LINK", flv, new_flv
                 try: 
@@ -658,16 +683,23 @@ class VodPage:
                 except:
                     raise "Probleme avec ln -s %s %s"%(flv, new_flv)
         # affiche, textes, images
-        for F in ("affiche.jpg", "textes", "images", "thumbs", "presentation.html","presentation_EN.html","diaporama.html","diaporama_FR.html","diaporama_EN.html","resume.html","resume_FR.html","resume_EN.html","gallery_EN.xml","gallery_FR.xml"):
-            old_F=op.join(source,F)
-            new_F=op.join(self.config.working_dir,dir,F)
+        for F in ("affiche.jpg", "textes", "images", "thumbs", "presentation.html", "presentation_EN.html", "diaporama.html", "diaporama_FR.html", "diaporama_EN.html", "resume.html", "resume_FR.html", "resume_EN.html", "gallery_EN.xml", "gallery_FR.xml"):
+            old_F = op.join(source, F)
+            new_F = op.join(self.config.working_dir, dir, F)
             if not op.islink(new_F) and op.exists(old_F):
                 print "LINK", old_F, new_F
                 try:
                     os.symlink(old_F, new_F)
                 except:
                     print "probleme avec ln -s %s %s"%(old_F, new_F)
-        return dir
+            if F == "presentation.html":    # add a index.html linking to presentation.html - used for static and masking
+                index = op.join(self.config.working_dir, dir, "index.html")
+                if not op.islink(index):    # dont do it twice
+                    try:
+                        os.symlink(new_F, index)
+                    except:
+                        print "probleme avec ln -s %s %s"%(new_F, index)
+        return dir 
 
     ###################################################################################
     def strip_flv(self,l):
@@ -824,6 +856,6 @@ class VodPage:
             date = " "
         return ((titre,affiche,date))
 
-if __name__ == "main":
-    print "cette bibliothèque doit être importée pour être utilisée"
+if __name__ == "__main__":
+    print u"cette bibliothèque doit être importée pour être utilisée"
 

@@ -39,29 +39,6 @@
 	</form>
 
 <hr/>
-<H2>Changer la Vidéo du mois</H2>
-    <p>
-	<form action="site.php" method="get" accept-charset="utf-8">
-			Choisissez la video dans la liste suivante: <br/>
-			<select name="choix">
-		<?php
-			foreach (list_video() as $file) {
-				$titre=titre($file);
-				if ($file == video_du_mois()) {
-				  echo "<option value=\"$file\" selected >$file : $titre</option>\n";
-				} else {
-				  echo "<option value=\"$file\">$file : $titre</option>\n";
-				}
-			}
-		?>
-			</select>
-		<input type="submit" name="action" value="Redéfinir la vidéo du mois" id="definir">
-		<P>Cette action permet de définir quelle la vidéo présentée actuellement comme la vidéo du mois téléchargeable<br/>
-
-		</td>
-	</form>
-
-<hr/>
 		
 </body>
 </html>

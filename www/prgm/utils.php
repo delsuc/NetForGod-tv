@@ -72,44 +72,45 @@ onclick="javascript:window.location.href='tele.php'">
 	<p>Taille de la bibliothèque de films : <?php echo $szbib ?></p>
 	<input type="submit" name="Places" value="Afficher la tailles des films" onclick="openWindow('calc_size.php','calc_size');">
 	<hr/>
-	<H2>Cette partie n'est pas finie, NE PAS ENCORE UTILISER</H2>
-
-    <h2>Modifier les éléments</h2>
-         <p>Ces boutons permettent de modifier les éléments du site sans passer par la machine de post-production<br/>
-             </p>
-             <table border="1" cellspacing="5" cellpadding="5" style="text-align:center">
-                 <tr>
-                     <th><i>Pages</i></th>
-                     <th><i>titre</i></th>
-                     <th><br><i>Action</i></th>
-                 </tr>
-                 <tr><td><a href="/VOD" target="blank">Page VOD</a></td><td>NetForGod TV</td>
-                     <td>
-                       <input type="submit" name="action" value="Recalculer" onclick="openWindow('calc_vod.php','calc_vod');">
-                     </td>
-                 </tr>
-             <?php
-             foreach (list_video() as $file) {
-                     $titre=titre($file);
-                     $titre_en = titre_en($file);
-                     $cl = click_blank($file);
-                     echo "<tr><FORM action=\"calc_tele.php\" method=\"get\"><input type=\"hidden\" name=\"video\" value=\"$file\"/>\n";
-                     echo "<td>$cl</td>";
-                     echo "<td><textarea name=\"titre_FR\" rows=\"2\" cols=\"40\">$titre</textarea>\n";
-                     echo "<textarea name=\"titre_EN\" rows=\"2\" cols=\"40\">$titre_en</textarea></td>\n";
-                     echo "<td><input type=\"submit\" name=\"action\" value=\"Recalculer\" ></td></tr>\n";
-                 }
-             ?>
-             </table>
-             <p></P>
-
-            <hr/>
-
     <H2>reste à faire :</H2>
     <li> changer les titres
     <li> changer les affiches
     <li> changer les photos
+    <li> effacer un film
 
 </div>
 </body>
 </html>
+<!-- <H2>Cette partie n'est pas finie, NE PAS ENCORE UTILISER</H2>
+
+<h2>Modifier les éléments</h2>
+     <p>Ces boutons permettent de modifier les éléments du site sans passer par la machine de post-production<br/>
+         </p>
+         <table border="1" cellspacing="5" cellpadding="5" style="text-align:center">
+             <tr>
+                 <th><i>Pages</i></th>
+                 <th><i>titre</i></th>
+                 <th><br><i>Action</i></th>
+             </tr>
+             <tr><td><a href="/VOD" target="blank">Page VOD</a></td><td>NetForGod TV</td>
+                 <td>
+                   <input type="submit" name="action" value="Recalculer" onclick="openWindow('calc_vod.php','calc_vod');">
+                 </td>
+             </tr>
+         <?php
+         // foreach (list_video() as $file) {
+         //         $titre=titre($file);
+         //         $titre_en = titre_en($file);
+         //         $cl = click_blank($file);
+         //         echo "<tr><FORM action=\"calc_tele.php\" method=\"get\"><input type=\"hidden\" name=\"video\" value=\"$file\"/>\n";
+         //         echo "<td>$cl</td>";
+         //         echo "<td><textarea name=\"titre_FR\" rows=\"2\" cols=\"40\">$titre</textarea>\n";
+         //         echo "<textarea name=\"titre_EN\" rows=\"2\" cols=\"40\">$titre_en</textarea></td>\n";
+         //         echo "<td><input type=\"submit\" name=\"action\" value=\"Recalculer\" ></td></tr>\n";
+         //     }
+         ?>
+         </table>
+         <p></P>
+
+        <hr/>
+ -->

@@ -45,6 +45,6 @@ export FFMPEG="nice /home/netforgod/USR/bin/ffmpeg"
 export COPYRIGHT=NetForGod
 
 #film price - not used so far.
-$film_price = 10.00;
+export film_price=10.00;
 
 ########################################

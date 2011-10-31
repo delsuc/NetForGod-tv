@@ -1,15 +1,13 @@
 basculer index_res.html à la racine, et enlever index.php
 verifier .htaccess partout
-temps estimé de download sur page tele
-finir deploy (voir travail)
+calc_vod.php
+calc_tele.php
+
+temps estimé de download sur page tele - 40 minutes
 
 sur saul dans FOI_03_10 il manque video.avi
 
-generer langues.js
-generer langues.php
-
 Catherine
-- le dernier film n'est pas le bon c'est Charles de Foucoud qui s'est mis en premier
 - pas d'image, affiche pour la reine de Hongrie
 
 dans FOI_03_10 EN* est bidon FR Seulement

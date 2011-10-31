@@ -193,7 +193,7 @@ link:
 
 # lpages : toutes les pages locales : html et DivX
 .PHONY: lpages
-lpages: diaporama.html resume.html presentation.html
+lpages: diaporama.html resume.html presentation.html .htaccess
 
 # construit le diaporama
 diaporama.html : $(localIm) $(localTi)

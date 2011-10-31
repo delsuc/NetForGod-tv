@@ -11,7 +11,6 @@ set -v on
 python config_mirror.py
 
 # create language utilities
-
 python langues.py
 # and copy over to work dir
 mv langues.js www/js
@@ -34,7 +33,28 @@ for i in css js prgm s; do
     cp www/$i/* $WEBROOT/$i
 done
 
+# create htaccess ref file
+cat > htaccess_def <<EOF
+AuthType Basic
+AuthName "Acces reserve' aux membres $COPYRIGHT"
+AuthUserFile $MAKEdir/.htpasswd
+<limit GET PUT POST>
+require valid-user
+</limit>
+EOF
+
+# and copy to prgm folder
+cp htaccess_def $WEBROOT/prgm/.htaccess
+
+# PLEASE ENTER PASSWORD FOR WEB USER admin
+htpasswd -c .htpasswd admin
 
 # finally, instal crontab, but before save previous ones
 crontab -l > previous_crontab
 tail -n +2 crontab_eg | crontab -
+#  currently installed crontab :
+crontab -l
+
+#=========================#
+#=   deployement done    =#
+#=========================#

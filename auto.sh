@@ -30,6 +30,7 @@ if ! [ -f FOI-working.lock ]; then
         ./domake.sh --silent --keep-going --no-print-directory
     fi
     python do_vod.py
+    python do_stat.py
     rm FOI-working.lock
 else 
     echo "calcul deja actif (FOI-working.lock)"

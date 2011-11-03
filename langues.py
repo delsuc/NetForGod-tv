@@ -113,20 +113,22 @@ def create_php(filename="langues.php"):
 // automatically created by langues.py script
 // copyright - M-A Delsuc, Communauté du Chemin-Neuf, do not use without authorization
 // created on %s
+
 """%(now))
-    F.writelines("$ordrelangues = "+phparray(ordrelangues.split())+";\n")
-    F.writelines("// le nom des mois en français\n")
+    F.writelines("$ordrelangues = "+phparray(ordrelangues.split()+['MUL'])+";\n")
+    F.writelines("\n// le nom des mois en français\n")
     F.writelines("$mois_nom = "+phparray(mois_nom)+";\n")
     F.writelines("$mois_nom_court = "+phparray(mois_nom_court)+";\n")
-    F.writelines("// le nom des mois en anglais\n")
+    F.writelines("\n// le nom des mois en anglais\n")
     F.writelines("$month_name = "+phparray(month_name)+";\n")
-    F.writelines("// le nom des langues en français\n")
+    F.writelines("\n// le nom des langues en français\n")
+    langues['MUL'] = 'multiple'
     F.writelines("$langues = "+phpdict(langues)+";\n")
-    F.writelines("// le nom des langues en anglais\n")
+    F.writelines("\n// le nom des langues en anglais\n")
     F.writelines("$languages = "+phpdict(languages)+";\n")
-    F.writelines("// le nom des langues le nom des langues dans leur propres langue\n")
+    F.writelines("\n// le nom des langues le nom des langues dans leur propres langue\n")
     F.writelines("$lang_self = "+phpdict(lang_self)+";\n")
-    F.writelines("// le mot resume\n")
+    F.writelines("\n// le mot resume\n")
     F.writelines("$resume = "+phpdict(resume)+";\n")
     F.close()
         

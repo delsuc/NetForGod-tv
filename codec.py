@@ -18,7 +18,7 @@ prim1 = 9007; # 8191;   # pour separer video; > 5000; premier c'est mieux,
 prim2 = 97; # pour separer ilang
 prim3 = 17;
 crclen = 5; # nbre de digit gardés pour le crc
-
+ordrelangues = langues.ordrelangues + " MUL"
 debug = 0;     # mettre à 0 pour production 
 
 #date_default_timezone_set("Europe/Paris")
@@ -33,7 +33,7 @@ def codage(date_sec, video, lang):
     # v) les derniers chiffres du crc codé en base 33 sont rajoutés à la fin
     """
     count = 0
-    ilang = langues.ordrelangues.split(' ').index(lang)+1     #trouve index de langue
+    ilang = ordrelangues.split(' ').index(lang)+1     #trouve index de langue
     date = int(math.floor(int(date_sec)/3600)) - 39*24*365       # change la date en heures depuis le ~ 1 1 2009
     descrip = (date*prim1 + video)*prim2 + ilang            # je préfère que la langue soit facile à piratée
     crc = binascii.crc32(str(descrip))
@@ -63,7 +63,7 @@ def decodage(val1):
     #    $descrip = ($date*$prim1 + $video)*$prim2 + $ilang;   
     dd = (val/prim2)
     il = int(val - dd*prim2)
-    lang = langues.ordrelangues.split(' ')[il-1]
+    lang = ordrelangues.split(' ')[il-1]
     video = (dd % prim1)
     date = (dd / prim1) + 39*24*365
     if (debug == 1):
@@ -98,8 +98,9 @@ def test_code(jours,  video, lang):
         print "decoded validite : %06d  : "%(d*3600)
         print time.ctime(d*3600);
 if __name__ == '__main__':
+    debug = 1
     jours = 30
     video = 712    #date du film  YY-MM  ==>  max = 2000 si 2020
     lang = "MUL"
-    t = test_code(jours,  video, lang)
+    test_code(jours,  video, lang)
 

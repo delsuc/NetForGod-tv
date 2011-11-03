@@ -24,7 +24,7 @@ table {text-align:left;}
     %for i in sorted(stat_film.keys(), reverse=True):
     <tr>
         <td><a href="videos/{{i}}/stat.html" >{{i}}</a>&nbsp;</td> <td>&nbsp;{{stat_film[i]}}</td>
-        <td> <img src="http://{{baseurl}}/awstats-icon/other/hp.png" width="{{stat_film[i]}}" height="10"></td>
+        <td> <img src="http://{{baseurl}}/images/hp.png" width="{{stat_film[i]}}" height="10"></td>
     </tr>
     %end
 </table>
@@ -37,7 +37,7 @@ table {text-align:left;}
     <tr>
         <td>{{ll[i]}}</td> <td>{{stat_lang[i]}}</td>
         <td>{{(100*stat_lang[i])/TTotal}}%</td>
-        <td> <img src="http://{{baseurl}}/awstats-icon/other/hp.png" width="{{(200*stat_lang[i])/TTotal}}" height="10"></td>
+        <td> <img src="http://{{baseurl}}/images/hp.png" width="{{(200*stat_lang[i])/TTotal}}" height="10"></td>
     </tr>
     %end
 </table>
@@ -46,7 +46,7 @@ table {text-align:left;}
     <table>
     <tr valign="bottom">
     %for i in sorted(stat_d):
-        <td><img align="bottom" src="http://{{baseurl}}/awstats-icon/other/vp.png" height="{{int(1.0*stat_d[i])}}" width="8" alt='Nombre de visites: {{stat_d[i]}}' title='Nombre de visites: {{stat_d[i]}}' /></td>
+        <td><img align="bottom" src="http://{{baseurl}}/images/vp.png" height="{{int(1.0*stat_d[i])}}" width="8" alt='Nombre de visites: {{stat_d[i]}}' title='Nombre de visites: {{stat_d[i]}}' /></td>
     %end
     </tr>
     <tr valign="middle">
@@ -62,7 +62,7 @@ table {text-align:left;}
     <tr valign="bottom">
     %for i in sorted(stat_ip.keys(), key = lambda s:stat_ip[s], reverse=True):
         %if stat_ip[i]<20: break
-        <td><img align="bottom" src="http://{{baseurl}}/awstats-icon/other/vp.png" height="{{int(1.0*stat_ip[i])}}" width="8" alt='Nombre de visites: {{stat_ip[i]}}' title='Nombre de visites: {{stat_ip[i]}}' /></td>
+        <td><img align="bottom" src="http://{{baseurl}}/images/vp.png" height="{{int(1.0*stat_ip[i])}}" width="8" alt='Nombre de visites: {{stat_ip[i]}}' title='Nombre de visites: {{stat_ip[i]}}' /></td>
     %end
     </tr>
 </table>

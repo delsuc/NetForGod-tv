@@ -13,6 +13,7 @@ import langues
 import codec
 
 base = os.environ['WEBROOT']
+baseurl = os.environ['WEBSITE']
 directories = glob.glob(op.join(base,"videos/FOI_*"))
 #base = "/home/netforgod/www/"
 #directories = glob.glob(base + '/videos/FOI_*')

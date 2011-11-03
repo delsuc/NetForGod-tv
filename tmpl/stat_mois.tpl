@@ -24,7 +24,7 @@ table {text-align:left;}
     <tr>
         <td>{{ll[i]}}</td> <td>{{stat_n[i]}}</td>
         <td>{{(100*stat_n[i])/Total}}%</td>
-        <td> <img src="http://www.netforgod.tv/awstats-icon/other/hp.png" width="{{(200*stat_n[i])/Total}}" height="10"></td>
+        <td> <img src="http://{{baseurl}}/awstats-icon/other/hp.png" width="{{(200*stat_n[i])/Total}}" height="10"></td>
         <td>
         %if stat_n[i] != len(stat_t[i]):
              (<i>+ {{len(stat_t[i])-stat_n[i]}} multi-t&eacute;l&eacute;chargements</i>)
@@ -38,7 +38,7 @@ table {text-align:left;}
     <table>
     <tr valign="bottom">
     %for i in sorted(stat_d):
-        <td><img align="bottom" src="http://www.netforgod.tv/awstats-icon/other/vp.png" height="{{len(stat_d[i])}}" width="8" alt='Nombre de visites: {{len(stat_d[i])}}' title='Nombre de visites: {{len(stat_d[i])}}' /></td>
+        <td><img align="bottom" src="http://{{baseurl}}/awstats-icon/other/vp.png" height="{{len(stat_d[i])}}" width="8" alt='Nombre de visites: {{len(stat_d[i])}}' title='Nombre de visites: {{len(stat_d[i])}}' /></td>
     %end
     </tr>
     <tr valign="middle">

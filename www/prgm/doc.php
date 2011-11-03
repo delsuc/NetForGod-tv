@@ -26,26 +26,26 @@
     <h2>Plan succinct de ce site</H2>
     Cette organisation est temporaire, en attendant l'ouverture du site.
     <ul>
-    <li><a href="http://www.netforgod.tv">http://www.netforgod.tv</a><br/>
+    <li><a href="http://<?php echo $WEBSITE; ?>">http://<?php echo $WEBSITE; ?></a><br/>
         page présentant la video du mois
     </li>
-    <li><a href="http://www.netforgod.tv/VOD">http://www.netforgod.tv/VOD</a><br/>
+    <li><a href="http://<?php echo $WEBSITE; ?>/VOD">http://<?php echo $WEBSITE; ?>/VOD</a><br/>
         La page permettant la VOD. Existe en Français et en anglais<BR/>
         page normalement en accès libre <BR/>
         Page de garde
         </li>
-    <li><a href="http://www.netforgod.tv/FOI">http://www.netforgod.tv/FOI</a><br/>
+    <li><a href="http://<?php echo $WEBSITE; ?>/FOI">http://<?php echo $WEBSITE; ?>/FOI</a><br/>
         La page permettant pour les groupes. Existe seulement en Français</li>
         page normalement en accès libre (pas encore écrite)
-    <li><a href="http://www.netforgod.tv/FOI/download">http://www.netforgod.tv/FOI/download</a><br/>
+    <li><a href="http://<?php echo $WEBSITE; ?>/FOI/download">http://<?php echo $WEBSITE; ?>/FOI/download</a><br/>
         La page pour le téléchargement de la video du mois en "HD". Page bilingue Français/Anglais<BR/>
         page normalement accessible à tous les responsables FOI
     </li>
-    <li><a href="http://www.netforgod.tv/FOI/FOI_07_10">http://www.netforgod.tv/FOI/FOI_YY_MM</a><br/>
+    <li><a href="http://<?php echo $WEBSITE; ?>/FOI/FOI_07_10">http://<?php echo $WEBSITE; ?>/FOI/FOI_YY_MM</a><br/>
         La page pour le téléchargement de la video YY/MM en "HD". Page bilingue Français/Anglais<BR/>
         pages normalement fermées, sauf cas particulier
     </li>
-    <li><a href="http://www.netforgod.tv/prgm">http://www.netforgod.tv/prgm</a><br/>
+    <li><a href="http://<?php echo $WEBSITE; ?>/prgm">http://<?php echo $WEBSITE; ?>/prgm</a><br/>
         Les pages d'administration<BR/>
         pages seulement accessible aux administrateurs
     </li>
@@ -60,7 +60,7 @@
     <p>Le principe est que le traitement des différents fichiers est pris automatiquement en charge par des scripts lancés automatiquement à intervalle régulier. Tout se base sur l'utilisation de noms standards des différents fichiers.
         Deux machines sont concernées :<br/>
         <b>la machine de PostProduction</b> : Saul (machine rapide sous linux, au 59)<br/>
-        <b>le serveur</b> : une dedibox : <a href="http://www.netforgod.tv">www.netforgod.tv</a> .</p>
+        <b>le serveur</b> : une dedibox : <a href="http://<?php echo $WEBSITE; ?>"><?php echo $WEBSITE; ?></a> .</p>
 
 
         <hr width="30%">
@@ -146,9 +146,9 @@
         D'autres sont créés sur le serveurs : les pages WEB, les videos basses résolutions, etc...</p>
     <p> On y trouve les pages suivantes :
     <ul>
-        <li>Pages de VOD (Video On Demand) <a href="http://www.netforgod.tv/VOD">www.netforgod.tv</A></li>
+        <li>Pages de VOD (Video On Demand) <a href="http://<?php echo $WEBSITE; ?>/VOD"><?php echo $WEBSITE; ?></A></li>
             on n'y trouve que les video "publique" (celles qui ont le fichier "public")
-        <li>Pages de téléchargement www.netforgod.tv/FOI/FOI_YY_MM</A></li>
+        <li>Pages de téléchargement <?php echo $WEBSITE; ?>/FOI/FOI_YY_MM</A></li>
             toutes les video, même celles qui ne sont pas publiques
         <li>ces pages d'administrations</li>
     </ul>

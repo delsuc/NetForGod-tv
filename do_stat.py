@@ -39,6 +39,7 @@ def test():
     print add_dic(a,b)
 def stat():
     """build the stats month per month and global"""
+    baseurl = os.environ['WEBSITE']
     TTotal = 0
     stat_film = {}
     stat_d = {}
@@ -59,6 +60,7 @@ def stat():
 
 def stat_month(dir):
     """reads dl.log in dir, and creates a log file"""
+    baseurl = os.environ['WEBSITE']
     file = op.join(dir,'dl.log')
 #    print file
     basename = op.basename(dir)

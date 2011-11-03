@@ -28,7 +28,7 @@ mkdir -p $VIDEOdir
 mkdir -p $VODdir
 
 # then utilities
-for i in css js prgm s; do
+for i in css js prgm s images; do
     mkdir -p $WEBROOT/$i
     cp www/$i/* $WEBROOT/$i
 done

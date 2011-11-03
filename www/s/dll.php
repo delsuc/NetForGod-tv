@@ -108,8 +108,8 @@ computing ...
 </p>
 <hr width="30%">
 </div>
-<li><a href="http://www.netforgod.tv" target="_blank">Voir les autres films en ligne</A></li>
-<li><i><a href="http://www.netforgod.tv/VOD/index_en.html" target="_blank">Watch the other movies online</a></i></li>
+<li><a href="http://<?php echo $WEBSITE; ?>" target="_blank">Voir les autres films en ligne</A></li>
+<li><i><a href="http://<?php echo $WEBSITE; ?>/VOD/index_en.html" target="_blank">Watch the other movies online</a></i></li>
 <hr width="30%">
 <p><a href="/media/conseils.html" target="_blank">Quelques conseils</a> pour regarder ce film<br/>
 <i><a href="/media/advices.html" target="_blank">Some advices</a> to watch this movie</i></P>

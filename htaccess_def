@@ -1,7 +1,0 @@
-# AuthUserFile /usr/local/apache/mots-de-passe-web
-# AuthGroupFile /dev/null
-# AuthName "    - Acces pour les Responsables FOI -    "
-# AuthType Basic
-# <LIMIT GET POST>
-# Require valid-user
-# </LIMIT>

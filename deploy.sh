@@ -46,6 +46,7 @@ EOF
 # and copy to prgm folder
 cp htaccess_def $WEBROOT/prgm/.htaccess
 
+# now creating password database
 # PLEASE ENTER PASSWORD FOR WEB USER admin
 htpasswd -c .htpasswd admin
 

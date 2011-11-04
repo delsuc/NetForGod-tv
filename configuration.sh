@@ -8,7 +8,7 @@ export DEBUG_MODE=0
 
 #######################################
 # name of the WEB site :
-export WEBSITE=www2.netforgod.tv
+export WEBSITE=www.netforgod.tv
 #######################################
 # addres and set-up for the programs
 # address of the prgm directory, which contains all the scripts

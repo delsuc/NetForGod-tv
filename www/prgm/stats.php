@@ -43,6 +43,7 @@ $szbib = `du -sh $VIDEOdir | awk '{print $1}'`;
 </ul>
 <hr width="30%">
 <h3>Statistique de la partie téléchargement</h3>
+    <p><a href="http://<?php echo $WEBSITE; ?>/stat_nfg.html">Récapitulatif</a> de tous les film.</p>
 
 	<table border="1" cellspacing="5" cellpadding="5" style="text-align:center">
 		<tr><th><i>Vidéo</i></th>

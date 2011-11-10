@@ -12,8 +12,11 @@ from bottle import view
 import langues
 import codec
 
-base = os.environ['WEBROOT']
-baseurl = os.environ['WEBSITE']
+try:
+    base = os.environ['WEBROOT']
+    baseurl = os.environ['WEBSITE']
+except:
+    raise Exception('do_stat.py cannot work - probably due to a lack of configuration, try doing    . configuration.sh    first')
 directories = glob.glob(op.join(base,"videos/FOI_*"))
 #base = "/home/netforgod/www/"
 #directories = glob.glob(base + '/videos/FOI_*')
@@ -84,7 +87,9 @@ def stat_month(dir):
                 m = pattern.search(field[9])    # find and parse film
                 if m:
                     (date, video, lang) = codec.decodage(m.group(1))
-                    if lang != field[6][:-1]:  raise "Internal error !"
+                    if lang != field[6][:-1]:
+                        #raise "Internal error !"
+                        continue
                 else:
                     lang = field[6][:-1]
                 stat_t.setdefault(lang, []).append(ip)  # append IP to stat_t[lang]

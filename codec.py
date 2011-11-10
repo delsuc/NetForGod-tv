@@ -57,8 +57,11 @@ def decodage(val1):
     v = val1[0:-crclen]
     val = int(v,33);  # en base 33
     val = (val / prim3)
-    check = binascii.crc32(str(val))
+    check = binascii.crc32(str(val))           # for some unknown reason it is one or the other which is ok
+    check2 = binascii.crc32(str(val))  &0xffffffff
+    print check
     check = radix.str(check, 35)
+    check2 = radix.str(check2, 35)
     #trouve index de langue
     #    $descrip = ($date*$prim1 + $video)*$prim2 + $ilang;   
     dd = (val/prim2)
@@ -72,8 +75,8 @@ def decodage(val1):
         print "video : ", video
         print "lang : ", il, lang
         print "date : ", date
-    if crc !=  check[-crclen:]:
-        print "caramba"
+    if crc not in ( check[-crclen:], check2[-crclen:] ) :
+        print "caramba",check[-crclen:], crc
         date=0
         video=0
         lang=0
@@ -82,9 +85,9 @@ def decodage(val1):
 def test_code(jours,  video, lang):
     date = time.time() + 3600*24* jours   #date de validite  time() donne le nbre de secondes depuis le 1 1 1970, à aujourd'hui
 #    date = 1300224603
-    print  "date :", jours, date
+    print "date :", jours, date
     print "video : ", video
-    print "lang : ",lang
+    print "lang : ", lang
     print "========codage"
     code = codage(date,  video, lang)
     print code
@@ -103,4 +106,8 @@ if __name__ == '__main__':
     video = 712    #date du film  YY-MM  ==>  max = 2000 si 2020
     lang = "MUL"
     test_code(jours,  video, lang)
+    print "============test2"
+    print decodage("8slwp7i5qh7sp")
+    print "============test3"
+    print decodage("8mn0g9fvqpads")
 

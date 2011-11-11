@@ -21,7 +21,7 @@
 				<th><i>visible sur<br/>la page VOD</i></th>
 				<th><i>en tête sur <br/>la page VOD</i></th></tr>
 		<?php
-		foreach (list_video() as $file) {
+		foreach (rlist_video() as $file) {
 			$titre=titre($file);
 			$cl = click($file);
 			echo "<tr><td class=\"ex\">$cl</td><td>$titre</td>";    # nom de la video

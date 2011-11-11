@@ -40,6 +40,8 @@ $myDir = opendir($basevideos);
         }
     }
 sort($list_video);
+$rlist_video = array_reverse($list_video);
+
 sort($list_FOI);
 
 $bavard = TRUE;
@@ -71,6 +73,11 @@ function list_video()   {
     # la liste des videos
     global $list_video;
     return $list_video;
+}
+function rlist_video()   {
+    # la liste des videos en ordre inverse
+    global $rlist_video;
+    return $rlist_video;
 }
 function list_FOI()   {
     # la liste des videos de type FOI_YY_MM

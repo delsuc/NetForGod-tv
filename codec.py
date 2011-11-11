@@ -59,7 +59,6 @@ def decodage(val1):
     val = (val / prim3)
     check = binascii.crc32(str(val))           # for some unknown reason it is one or the other which is ok
     check2 = binascii.crc32(str(val))  &0xffffffff
-    print check
     check = radix.str(check, 35)
     check2 = radix.str(check2, 35)
     #trouve index de langue

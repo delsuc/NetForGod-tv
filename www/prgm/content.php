@@ -37,7 +37,7 @@
             </td>
         </tr>
     <?php
-    foreach (list_video() as $file) {
+    foreach (rlist_video() as $file) {
             $titre=titre($file);
             $titre_en = titre_en($file);
             $cl = click_blank($file);

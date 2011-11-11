@@ -27,7 +27,7 @@
 			$cache = 0;
 			$visi = 0;
 			$divx = 0;
-			foreach (list_video() as $file) {
+			foreach (rlist_video() as $file) {
 				$titre=titre($file);
 				$titre_en = titre_en($file);
 				$cl = click_blank($file);

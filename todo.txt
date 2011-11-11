@@ -1,17 +1,17 @@
-basculer index_res.html à la racine, et enlever index.php
 verifier .htaccess partout
 calc_vod.php
 calc_tele.php
+Etat du pipe-line de production
 permalink
+factoriser code google
+factoriser FOI_**
 
-temps estimé de download sur page tele - 40 minutes
+temps estimé de download sur page tele 
 
 sur saul dans FOI_03_10 il manque video.avi
 
 Catherine
 - pas d'image, affiche pour la reine de Hongrie
 
-Etat du pipe-line de production
-
 dans FOI_03_10 EN* est bidon FR Seulement
-
+FOI

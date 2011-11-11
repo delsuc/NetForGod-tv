@@ -10,7 +10,7 @@ $szbib = `du -sh $VIDEOdir | awk '{print $1}'`;
 <ul>
     <li>Le site comporte
     <ul>
-        <li> <?php echo count($list_video);?> films multilangues (HD et streaming)</li>
+        <li> <?php echo count(list_video());?> films multilangues (HD et streaming)</li>
         <li> qui prennent <?php echo $szbib;?> sur le disque dur</li>
         <li>qui représenteent en tout <?php 
         $cc = 0;
@@ -25,7 +25,7 @@ $szbib = `du -sh $VIDEOdir | awk '{print $1}'`;
     }
     echo $cc;
     ?> films publiques</li>
-    <li>Il y a <?php echo (count($list_video)-$cc);?> films privés</li>
+    <li>Il y a <?php echo (count(list_video())-$cc);?> films privés</li>
 </ul>
 <hr width="30%">
 <H1>Statistiques sur les visites</H1>
@@ -49,7 +49,7 @@ $szbib = `du -sh $VIDEOdir | awk '{print $1}'`;
 		<tr><th><i>Vidéo</i></th>
 			<th><i>titre</i></th></tr>
     		<?php
-    		foreach (list_video() as $file) {
+    		foreach (rlist_video() as $file) {
     			$titre=titre($file);
     			$cl = click($file);
     			echo "<tr><td><a href=\"$urldivx/$file/stat.html\">$file</a></td>";

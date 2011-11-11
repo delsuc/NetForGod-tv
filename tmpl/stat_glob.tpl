@@ -2,8 +2,8 @@
 <html lang="en,fr" xml:lang="en,fr" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<meta content="NetForGod page " name="description" />
-<title>Statistiques des t&eacute;l&eacute;chargement des films Net for God</title>
+<meta content="Statistics page " name="description" />
+<title>Statistiques des t&eacute;l&eacute;chargement des films {{baseurl}}</title>
 <style type="text/css">
 body {font-size:12pt; font-family: verdana,sans-serif; color=#FFFFCC;}
 .centre {margin-left:auto; margin-right:auto; text-align:center;}
@@ -12,18 +12,18 @@ table {text-align:left;}
 </head>
 <body bgcolor="#000000" text="#FFFFCC"  link="#FF0033">
 <centre>
-<H1>Statistiques de t&eacute;l&eacute;chargement des films Net for God</H1>
+<H1>Statistiques de t&eacute;l&eacute;chargement des films {{baseurl}}</H1>
 <p>Ces statistiques comptent &agrave; partir de la cr&eacute;ation du site</p>
 <h2>{{TTotal}} t&eacute;l&eacute;chargements</h2>
 </centre>
 <HR>
     <h2>Statistiques par film</h2>
 <table border="0" cellspacing="1" cellpadding="1">
-    <tr><th>Film</th><th COLSPAN="2">nombre de t&eacute;l&eacute;chargements</th><th></th>
+    <tr><th>Film</th><th COLSPAN="2">nombre de t&eacute;l&eacute;chargements uniques (<i>total</i>)</th><th></th>
     </tr>
     %for i in sorted(stat_film.keys(), reverse=True):
     <tr>
-        <td><a href="videos/{{i}}/stat.html" >{{i}}</a>&nbsp;</td> <td>&nbsp;{{stat_film[i]}}</td>
+        <td><a href="videos/{{i}}/stat.html" >{{i}}</a>&nbsp;</td> <td>&nbsp;{{stat_film[i]}} (<i>{{stat_tfilm[i]}}</i>)</td>
         <td> <img src="http://{{baseurl}}/images/hp.png" width="{{stat_film[i]}}" height="10"></td>
     </tr>
     %end
@@ -62,7 +62,7 @@ table {text-align:left;}
     <tr valign="bottom">
     %for i in sorted(stat_ip.keys(), key = lambda s:stat_ip[s], reverse=True):
         %if stat_ip[i]<20: break
-        <td><img align="bottom" src="http://{{baseurl}}/images/vp.png" height="{{int(1.0*stat_ip[i])}}" width="8" alt='Nombre de visites: {{stat_ip[i]}}' title='Nombre de visites: {{stat_ip[i]}}' /></td>
+        <td><img align="bottom" src="http://{{baseurl}}/images/vp.png" height="{{int(1.0*stat_ip[i])}}" width="8" alt='{{stat_ip[i]}} downloads' title='{{ipnm[i]}} {{stat_ip[i]}} downloads' /></td>
     %end
     </tr>
 </table>

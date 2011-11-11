@@ -2,8 +2,8 @@
 <html lang="en,fr" xml:lang="en,fr" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
-<meta content="NetForGod page " name="description" />
-<title> Statistiques des t&eacute;l&eacute;chargement des films Net for God pour  {{basename}}</title>
+<meta content="Statistics page " name="description" />
+<title> Statistiques des t&eacute;l&eacute;chargement des films {{baseurl}} pour  {{basename}}</title>
 <style type="text/css">
 body {font-size:12pt; font-family: verdana,sans-serif; color=#FFFFCC;}
 .centre {margin-left:auto; margin-right:auto; text-align:center;}
@@ -12,9 +12,10 @@ table {text-align:left;}
 </head>
 <body bgcolor="#000000" text="#FFFFCC"  link="#FF0033">
 <centre>
-<H1>Statistiques de t&eacute;l&eacute;chargement des films Net for God</H1>
+<H1>Statistiques de t&eacute;l&eacute;chargement des films {{baseurl}}</H1>
 
 <h2>{{basename}} <br/> {{Total}} t&eacute;l&eacute;chargements uniques</h2>
+<p><i>Pour {{Tototal}} t&eacute;l&eacute;chargements en tout</i></p>
 </centre>
 <HR>
 <table border="0" cellspacing="1" cellpadding="1">

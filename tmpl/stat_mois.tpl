@@ -13,7 +13,7 @@ table {text-align:left;}
 <body bgcolor="#000000" text="#FFFFCC"  link="#FF0033">
 <centre>
 <H1>Statistiques de t&eacute;l&eacute;chargement des films {{baseurl}}</H1>
-
+<p><i>d&eacute;termin&eacute;es le {{now}}</i></p>
 <h2>{{basename}} <br/> {{Total}} t&eacute;l&eacute;chargements uniques</h2>
 <p><i>Pour {{Tototal}} t&eacute;l&eacute;chargements en tout</i></p>
 </centre>
@@ -35,11 +35,29 @@ table {text-align:left;}
     %end
 </table>
 <HR>
-    <p><b>t&eacute;l&eacute;chargements par jour</b></p>
+        <p><b>t&eacute;l&eacute;chargements par jour</b></p>
+        <table>
+        <tr valign="bottom">
+        %vratio = 2
+        %for i in sorted(stat_d):
+            %dl = len(stat_d[i])
+            <td><img align="bottom" src="http://{{baseurl}}/images/vp.png" height="{{dl}}" width="8" alt='Nombre de visites: {{dl}}' title='Nombre de visites: {{dl}}' /></td>
+        %end
+        </tr>
+        <tr valign="middle">
+        %for i in sorted(stat_d):
+            <td><span alt='date: {{i}}' title='date: {{i}}'>{{i[-2:]}}</span></td>
+        %end
+        </tr>
+    </table>
+
+    <p><b>t&eacute;l&eacute;chargements cumul&eacute;s depuis le lancement.</b></p>
     <table>
     <tr valign="bottom">
+    %totdl = 0
     %for i in sorted(stat_d):
-        <td><img align="bottom" src="http://{{baseurl}}/images/vp.png" height="{{len(stat_d[i])}}" width="8" alt='Nombre de visites: {{len(stat_d[i])}}' title='Nombre de visites: {{len(stat_d[i])}}' /></td>
+        %totdl += len(stat_d[i])
+        <td><img align="bottom" src="http://{{baseurl}}/images/vh.png" height="{{totdl/vratio}}" width="8" alt='Nombre total de visites: {{totdl}}' title='Nombre total de visites: {{totdl}}' /></td>
     %end
     </tr>
     <tr valign="middle">

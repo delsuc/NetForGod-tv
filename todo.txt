@@ -6,6 +6,10 @@ permalink
 factoriser code google
 factoriser FOI_**
 
+mettre dans config
+premiere année
+dl moyen par mois (ou calculer)
+
 temps estimé de download sur page tele 
 
 sur saul dans FOI_03_10 il manque video.avi

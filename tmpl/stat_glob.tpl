@@ -13,7 +13,9 @@ table {text-align:left;}
 <body bgcolor="#000000" text="#FFFFCC"  link="#FF0033">
 <centre>
 <H1>Statistiques de t&eacute;l&eacute;chargement des films {{baseurl}}</H1>
-<p>Ces statistiques comptent &agrave; partir de la cr&eacute;ation du site</p>
+<p>Ces statistiques comptent &agrave; partir de la cr&eacute;ation du site<br/>
+<i>d&eacute;termin&eacute;es le {{now}}</i></p>
+
 <h2>{{TTotal}} t&eacute;l&eacute;chargements</h2>
 </centre>
 <HR>
@@ -42,19 +44,27 @@ table {text-align:left;}
     %end
 </table>
 <HR>
-<h2>Statistiques par jour</h2>
+<h2>Statistiques par ann&eacute;es</h2>
+  %for year in range(2007,today.year+1):
+    <HR>
+    <h3> {{year}} </h3>
     <table>
     <tr valign="bottom">
     %for i in sorted(stat_d):
-        <td><img align="bottom" src="http://{{baseurl}}/images/vp.png" height="{{int(1.0*stat_d[i])}}" width="8" alt='Nombre de visites: {{stat_d[i]}}' title='Nombre de visites: {{stat_d[i]}}' /></td>
+        %if int(i[0:4]) == year:
+            <td><img align="bottom" src="http://{{baseurl}}/images/vp.png" height="{{int(1.0*stat_d[i])}}" width="8" alt='Nombre de visites: {{stat_d[i]}}' title='Nombre de visites: {{stat_d[i]}}' /></td>
+        %end
     %end
     </tr>
     <tr valign="middle">
     %for i in sorted(stat_d):
-        <td><span alt='date: {{i}}' title='date: {{i}}'>{{i[-2:]}}</span></td>
+        %if int(i[0:4]) == year:
+            <td><span alt='date: {{i}}' title='date: {{i}}'>{{i[-2:]}}</span></td>
+        %end
     %end
     </tr>
-</table>
+    </table>
+  %end
 <p><i>mettre la souris sur la barre pour avoir le nombre exact, et sur le chiffre pour avoir la date exacte</i></p>
 <HR>
 <h2>Grands telechargeurs</h2>

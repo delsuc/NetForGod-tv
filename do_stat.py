@@ -1,6 +1,29 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# Ce script fait une stat des telechargements
+"""
+Ce script fait une stat des telechargements
+
+Copyright Communaute du Chemin-Neuf : www.chemin-neuf.org
+
+M-A Delsuc marc-andre@delsuc.net
+November 2011
+
+LICENCE:
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+"""
+
 
 import re
 import datetime
@@ -14,6 +37,8 @@ import codec
 from subprocess import Popen, PIPE
 from collections import defaultdict
 import itertools
+import datetime
+from time import strftime
 
 try:
     base = os.environ['WEBROOT']
@@ -60,6 +85,7 @@ def constant_factory(value):
 def stat():
     """build the stats month per month and global"""
     baseurl = os.environ['WEBSITE']
+    now = strftime("%Y-%m-%d %H:%M:%S")
     TTotal = 0
     stat_tfilm = {}
     stat_film = {}
@@ -80,12 +106,14 @@ def stat():
         ipnm[ip] = ip_name(ip)
     ll = langues.languages
     F = open( op.join(base,'stat_nfg.html'), 'w')
+    today = datetime.date.today()
     html = stat_glob_html(locals())    # makes html from local variables and template
     F.write( html )                     # and write it
     F.close()
 
 def stat_month(dir):
     """reads dl.log in dir, and creates a log file"""
+    now = strftime("%Y-%m-%d %H:%M:%S")
     baseurl = os.environ['WEBSITE']
     file = op.join(dir,'dl.log')
 #    print file
@@ -137,4 +165,3 @@ def stat_month(dir):
 if __name__ == '__main__':
 #    os.system("cd ..; ./rsync.sh")
     stat()
-

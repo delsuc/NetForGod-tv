@@ -16,19 +16,20 @@ si vous voulez garder la compatibilité avec une version antérieur du sit, il f
 __author__ = "M-A.Delsuc"
 __version__ = "1.3 oct 2011"
 __copy__ = "Communaute du Chemin-Neuf"
+import codecs
 
 # le nom des mois en français
-mois_nom =  [" ","janvier","février","mars","avril","mai","juin","juillet","août","septembre","octobre","novembre","décembre"]
+mois_nom =  [u" ",u"janvier",u"février",u"mars",u"avril",u"mai",u"juin",u"juillet",u"août",u"septembre",u"octobre",u"novembre",u"décembre"]
 mois_nom_court =  [" ","jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"]
 
 # le nom des mois en anglais
 month_name =[" ","January","February","March","April","May","June","July","August","September","October","November","December"]
 
 # le nom des langues en français
-langues = {'FR':'Français', 'EN':'Anglais', 'DE':'Allemand', 'ES':'Espagnol', 'IT':'Italien','PT':'Portugais',
-        'HU':'Hongrois','NL':'Néerlandais','CS':'Tchèque','SK':'Slovaque','LV':'Letton','PL':'Polonais','RU':'Russe', 'LT':'Lituanien',
-        'TR':'Turc', 'AR':'Arabe','HY':'Arménien','ZH':'Chinois','JA':'Japonais','VI':'Vietnamien',
-        'MOS':'Mooré','LN':'Lingala','RN':'Kirundi','MU':'Créole Mauricien','MG':'Malgache'}
+langues = {'FR':u'Français', 'EN':u'Anglais', 'DE':u'Allemand', 'ES':u'Espagnol', 'IT':u'Italien','PT':u'Portugais',
+        'HU':u'Hongrois','NL':u'Néerlandais','CS':u'Tchèque','SK':u'Slovaque','LV':u'Letton','PL':u'Polonais','RU':u'Russe', 'LT':u'Lituanien',
+        'TR':u'Turc', 'AR':u'Arabe','HY':u'Arménien','ZH':u'Chinois','JA':u'Japonais','VI':u'Vietnamien',
+        'MOS':u'Mooré','LN':u'Lingala','RN':u'Kirundi','MU':u'Créole Mauricien','MG':u'Malgache'}
 
 # le nom des langues en anglais
 languages = {'FR':'French', 'EN':'English', 'DE':'German', 'ES':'Spanish','IT':'Italian','PT':'Portuguese',
@@ -37,28 +38,28 @@ languages = {'FR':'French', 'EN':'English', 'DE':'German', 'ES':'Spanish','IT':'
         'MOS':'Mossi','LN':'Lingala','RN':'Kirundi','MU':'Mauritian Creole','MG':'Malagasy'}
 
 # le nom des langues dans leur propres langue
-lang_self = {'FR':'Français', 'EN':'English', 'DE':'Deutsch', 'ES':'Español','IT':'Italiano','PT':'Português',
-        'HU':'Magyar','NL':'Nederlands','CS':'Česky','SK':'Slovenčina','LV':'Latviski','PL':'Polski','RU':'Pусский', 'LT':'Lietuviškai',
-        'TR':'Türkçe','AR':'العربية','HY':'Հայերեն','ZH':'漢語','JA':'日本語','VI':'Tiếng Việt',
-        'MOS':'Mòoré','LN':'Lingala','RN':'Kirundi','MU':'Kreol moricien','MG':'Malagasy'}
+lang_self = {'FR':u'Français', 'EN':u'English', 'DE':u'Deutsch', 'ES':u'Español','IT':u'Italiano','PT':u'Português',
+        'HU':u'Magyar','NL':u'Nederlands','CS':u'Česky','SK':u'Slovenčina','LV':u'Latviski','PL':u'Polski','RU':u'Pусский', 'LT':u'Lietuviškai',
+        'TR':u'Türkçe','AR':u'العربية','HY':u'Հայերեն','ZH':u'漢語','JA':u'日本語','VI':u'Tiếng Việt',
+        'MOS':u'Mòoré','LN':u'Lingala','RN':u'Kirundi','MU':u'Kreol moricien','MG':u'Malagasy'}
 
 # le mot résumé dans qq langues
 resume = {
-    "CS" : "Shrnutí",
-    "DE" : "Zusammenfassung",
-    "EN" : "Summary",
-    "ES" : "Resumen",
-    "FR" : "Résumé",
-    "HU" : "összefoglaló ",
-    "HY" : "Սեղմագիր",
-    "IT" : "Riassunto",
-    "LT" : "Trumpai",
-    "LV" : "Kopsavilkums",
-    "NL" : "Samenvatting",
-    "PL" : "Streszczenie",
-    "PT" : "Resumo",
-    "RU" : "Краткое содержание",
-    "SK" : "Zhrnutie"}
+    "CS" : u"Shrnutí",
+    "DE" : u"Zusammenfassung",
+    "EN" : u"Summary",
+    "ES" : u"Resumen",
+    "FR" : u"Résumé",
+    "HU" : u"összefoglaló ",
+    "HY" : u"Սեղմագիր",
+    "IT" : u"Riassunto",
+    "LT" : u"Trumpai",
+    "LV" : u"Kopsavilkums",
+    "NL" : u"Samenvatting",
+    "PL" : u"Streszczenie",
+    "PT" : u"Resumo",
+    "RU" : u"Краткое содержание",
+    "SK" : u"Zhrnutie"}
 
 # l'ordre des langues
 ordrelangues = 'FR EN DE ES IT PT HU NL CS SK LV LT PL RU TR HY AR ZH JA VI MOS LN RN MU MG'
@@ -66,9 +67,9 @@ ordrelangues = 'FR EN DE ES IT PT HU NL CS SK LV LT PL RU TR HY AR ZH JA VI MOS 
 def create_js(filename="langues.js"):
     """crée un fichier javascript qui sera utilisable dans les pages WEB"""
     import datetime
-    F=file(filename,'w')
+    F=codecs.open(filename,'w',encoding='utf-8')    # open to write in utf-8
     now = datetime.datetime.now()
-    F.writelines("""// Javascript library for handling various foreign languages
+    F.writelines(u"""// Javascript library for handling various foreign languages
 // automatically created by langues.py script
 // copyright - M-A Delsuc, Communauté du Chemin-Neuf, do not use without authorization
 // created on %s
@@ -106,38 +107,38 @@ def phpdict(dico):
 def create_php(filename="langues.php"):
     """crée un fichier php qui sera utilisable dans les pages WEB"""
     import datetime
-    F=file(filename,'w')
+    F=codecs.open(filename,'w',encoding='utf-8')    # open to write in utf-8
     now = datetime.datetime.now()
-    F.writelines("""<?php
+    F.writelines(u"""<?php
 // library for handling various foreign languages
 // automatically created by langues.py script
 // copyright - M-A Delsuc, Communauté du Chemin-Neuf, do not use without authorization
 // created on %s
 
 """%(now))
-    F.writelines("$ordrelangues = "+phparray(ordrelangues.split()+['MUL'])+";\n")
-    F.writelines("\n// le nom des mois en français\n")
-    F.writelines("$mois_nom = "+phparray(mois_nom)+";\n")
-    F.writelines("$mois_nom_court = "+phparray(mois_nom_court)+";\n")
-    F.writelines("\n// le nom des mois en anglais\n")
-    F.writelines("$month_name = "+phparray(month_name)+";\n")
-    F.writelines("\n// le nom des langues en français\n")
+    F.writelines(u"$ordrelangues = "+phparray(ordrelangues.split()+['MUL'])+";\n")
+    F.writelines(u"\n// le nom des mois en français\n")
+    F.writelines(u"$mois_nom = "+phparray(mois_nom)+";\n")
+    F.writelines(u"$mois_nom_court = "+phparray(mois_nom_court)+";\n")
+    F.writelines(u"\n// le nom des mois en anglais\n")
+    F.writelines(u"$month_name = "+phparray(month_name)+";\n")
+    F.writelines(u"\n// le nom des langues en français\n")
     langues['MUL'] = 'multiple'
-    F.writelines("$langues = "+phpdict(langues)+";\n")
-    F.writelines("\n// le nom des langues en anglais\n")
-    F.writelines("$languages = "+phpdict(languages)+";\n")
-    F.writelines("\n// le nom des langues le nom des langues dans leur propres langue\n")
-    F.writelines("$lang_self = "+phpdict(lang_self)+";\n")
-    F.writelines("\n// le mot resume\n")
-    F.writelines("$resume = "+phpdict(resume)+";\n")
+    F.writelines(u"$langues = "+phpdict(langues)+";\n")
+    F.writelines(u"\n// le nom des langues en anglais\n")
+    F.writelines(u"$languages = "+phpdict(languages)+";\n")
+    F.writelines(u"\n// le nom des langues le nom des langues dans leur propres langue\n")
+    F.writelines(u"$lang_self = "+phpdict(lang_self)+";\n")
+    F.writelines(u"\n// le mot resume\n")
+    F.writelines(u"$resume = "+phpdict(resume)+";\n")
     F.close()
         
 def report():
     """Produit la table des langues utilisées"""
-    print "Liste des langues disponibles :"
-    print "=================================================================================================="
-    print "code:   en français\t-\ten anglais\t-\tdans la langue\t-\tle mot résumé"
-    print "=================================================================================================="
+    print u"Liste des langues disponibles :"
+    print u"=================================================================================================="
+    print u"code:   en français\t-\ten anglais\t-\tdans la langue\t-\tle mot résumé"
+    print u"=================================================================================================="
     for l in ordrelangues.split():
         try:
             res = resume[l]

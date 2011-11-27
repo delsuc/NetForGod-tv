@@ -3,10 +3,10 @@
 """
 Ce script fait une stat des telechargements
 
-Copyright Communaute du Chemin-Neuf : www.chemin-neuf.org
+Created by Marc-Andre marc-andre@delsuc.net
+on 2011-10-29.
 
-M-A Delsuc marc-andre@delsuc.net
-November 2011
+Copyright (c) 2011 Communaute du Chemin-Neuf. www.chemin-neuf.org - All rights reserved.
 
 LICENCE:
 This program is free software: you can redistribute it and/or modify
@@ -23,7 +23,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 """
-
 
 import re
 import datetime

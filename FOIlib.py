@@ -13,9 +13,10 @@ import os, sys
 import glob
 import re
 import os.path as op
+import codecs
 
 
-footer="""
+footer=u"""
 <BR CLEAR=ALL>
 <div id="pied">
 <ul>
@@ -33,19 +34,19 @@ def chop_nl(list_of_strings):
         list_of_strings[i] = list_of_strings[i].rstrip("\n")
 
 def clean(st):
-    """nettoie les characteres interdit en HTML"""
+    """nettoie les characteres interdit en HTML et passe en unicode"""
     return st.replace("&","&amp;").replace("'","&#x27;").replace('"',"&quot;").replace("\n","<br/>").replace("\r","")
 
 def current_title(dir):
     """ lit les fichiers titre_EN.txt et titre_FR.txt """
     tis = glob.glob(op.join(dir,"textes","titre_*.txt"))
-    (ti_FR,ti_EN) = (("pas de titre",),("no title",))
+    (ti_FR,ti_EN) = ((u"pas de titre",),(u"no title",))
     for f in tis:
         if f.endswith('_FR.txt'):
-            ti_FR = file(f).readlines()
+            ti_FR = codecs.open(f, encoding='utf-8').readlines()
             chop_nl(ti_FR)
         if f.endswith('_EN.txt'):
-            ti_EN = file(f).readlines()
+            ti_EN = codecs.open(f, encoding='utf-8').readlines()
             chop_nl(ti_EN)
     return((ti_FR,ti_EN))
 
@@ -57,10 +58,10 @@ def current_resume(dir):
     for f in tis:
         if f.endswith('_FR.txt'):
 #            ti_FR = "<BR>".join(file(f).readlines())
-            ti_FR = file(f).readlines()
+            ti_FR = codecs.open(f, encoding='utf-8').readlines()
             chop_nl(ti_FR)
         if f.endswith('_EN.txt'):
-            ti_EN = file(f).readlines()
+            ti_EN = codecs.open(f, encoding='utf-8').readlines()
             chop_nl(ti_EN)
     return((ti_FR,ti_EN))
 
@@ -100,9 +101,9 @@ class diaporama:
         self.dir = dir
         (self.annee,self.mois)=current_date(self.dir)
         self.setLang(lang)
-        imlist = glob.glob(op.join(self.dir,"images","photo*.jpg"))
-        self.empty = len(imlist)==0 # tells that there is no diaporama to do
-        self.texte="""\
+        self.imlist = sorted(glob.glob(op.join(self.dir,"images","photo*.jpg")))
+        self.empty = len(self.imlist)==0 # tells that there is no diaporama to do
+        self.texte=u"""\
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
     "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -158,15 +159,15 @@ pageTracker._trackPageview();
         self.lang=lang
         (titre_fr,titre_en)=current_title(self.dir)
         if self.lang=="FR":
-            self.slogan="Au service de l'UNITÉ des CHRÉTIENS et de la PAIX dans le MONDE."
-            self.discover="Découvir la fraternité NetForGod"
-            self.presname="presentation.html"
-            self.diaponame="diaporama.html"
-            self.resname="resume.html"
-            self.resume="Résumé du film"
+            self.slogan=u"Au service de l'UNITÉ des CHRÉTIENS et de la PAIX dans le MONDE."
+            self.discover=u"Découvir la fraternité NetForGod"
+            self.presname=u"presentation.html"
+            self.diaponame=u"diaporama.html"
+            self.resname=u"resume.html"
+            self.resume=u"Résumé du film"
             self.titre=titre_fr
             self.nomMois=langues.mois_nom[self.mois]
-            self.link="""Français<a href="diaporama_EN.html"> / English</a>"""  # attention, non généralisable
+            self.link=u"""Français<a href="diaporama_EN.html"> / English</a>"""  # attention, non généralisable
         elif self.lang=="EN":
             self.slogan="Working for Christian unity and for peace in the world !"
             self.discover="Discover the NetForGod fraternity"
@@ -176,7 +177,7 @@ pageTracker._trackPageview();
             self.resume="Movie synopsis"
             self.titre=titre_en
             self.nomMois=langues.month_name[self.mois]
-            self.link="""English <a href="diaporama.html">/ Français</a>"""
+            self.link=u"""English <a href="diaporama.html">/ Français</a>"""
 
     def images(self,maxsiz=(720,576),thumbsiz=(80,72)):
         """
@@ -187,7 +188,7 @@ pageTracker._trackPageview();
         import Image
         if not op.exists(op.join(self.dir,"thumbs")):
             os.mkdir(op.join(self.dir,"thumbs"))
-        for ii in glob.glob(op.join(self.dir,"images","photo*.jpg")) :
+        for ii in self.imlist:  #glob.glob(op.join(self.dir,"images","photo*.jpg")) :
             im=Image.open(ii)
             if 1.1*max(maxsiz)<max(im.size):    # needs to undersample
                 print "je reduis %s  taille : %s"%(ii, str(im.size))
@@ -205,19 +206,18 @@ pageTracker._trackPageview();
         takes photos in images/photoxx.jpg and captions in textes/photoxx_LL.jpg
         and create gallery_LL.xml where LL is the language code
         """
-
-        XML=file(op.join(self.dir,"gallery_"+self.lang+".xml"),"w")
+        XML=codecs.open(op.join(self.dir,"gallery_"+self.lang+".xml"),mode="w",encoding='utf-8')
         (titre_fr,titre_en)=current_title(self.dir)
         if self.lang=="EN":
             titre=titre_en
         else:
             titre=titre_fr
-        XML.writelines( """\
+        XML.writelines( u"""\
     <?xml version="1.0" encoding="UTF-8"?>
     <simpleviewerGallery maxImageWidth="720" maxImageHeight="576" textColor="0xFFFFFF" frameColor="0xffffff" frameWidth="20" stagePadding="40" thumbnailColumns="3" thumbnailRows="4" navPosition="left" title="%s" enableRightClickOpen="false" backgroundImagePath="" imagePath="images/" thumbPath="thumbs/">
     """%" - ".join(titre))
 
-        for ii in glob.glob(op.join(self.dir,"images","photo*.jpg")):
+        for ii in self.imlist: #glob.glob(op.join(self.dir,"images","photo*.jpg")):
             i=ii
             XML.writelines("<image>\n")
             XML.writelines("   <filename>%s</filename>\n"%(op.basename(i)))
@@ -233,7 +233,7 @@ pageTracker._trackPageview();
         f1 =  image.replace(".jpg","_"+self.lang+".txt")
         f2 =  op.join(op.dirname(image),"legendes_"+self.lang+".txt")
         try:
-            f=file(f1)
+            f=codecs.open(f1,encoding='utf-8')
             text=" ".join(f.readlines()).strip(" \n")
             f.close()
         except:
@@ -241,7 +241,7 @@ pageTracker._trackPageview();
         if text == "":
             prefix = op.basename(image).replace(".jpg"," : ")   # photoxx : 
             try:
-                f=file(f2)
+                f = codecs.open(f2, encoding='utf-8')
                 for l in f:
                     if l.startswith(prefix):
                         text = l.replace(prefix,"")
@@ -250,7 +250,7 @@ pageTracker._trackPageview();
             except:
                 text = ""
         if text == "":
-            print "pas de légende en %s pour %s dans %s "%(self.lang,image,op.abspath(self.dir))
+            print u"pas de légende en %s pour %s dans %s "%(self.lang,image,op.abspath(self.dir))
         return text
 
     def do_html(self,lang="FR"):
@@ -262,7 +262,7 @@ pageTracker._trackPageview();
         formvar["lang"]=self.lang
         formvar["flat_title"]=" - ".join(self.titre)
         formvar["br_titre"]="<br>".join(self.titre)
-        HTML=file(op.join(self.dir,self.diaponame),"w")
+        HTML=codecs.open(op.join(self.dir,self.diaponame),mode="w",encoding='utf-8')
         HTML.writelines(self.texte%formvar)
         HTML.close()
 
@@ -272,7 +272,7 @@ class presentation:
         self.dir = dir
         (self.annee,self.mois)=current_date(self.dir)
         self.setLang(lang)
-        self.texte="""\
+        self.texte=u"""\
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -313,25 +313,25 @@ function openWindow(url,name)
         (titre_fr,titre_en)=current_title(self.dir)
         (annee,mois)=current_date(self.dir)
         if self.lang=="FR":
-            self.slogan="Au service de l'UNITÉ des CHRÉTIENS et de la PAIX dans le MONDE."
-            self.discover="Découvir la fraternité NetForGod"
+            self.slogan=u"Au service de l'UNITÉ des CHRÉTIENS et de la PAIX dans le MONDE."
+            self.discover=u"Découvir la fraternité NetForGod"
             self.presname="presentation.html"
             self.diaponame="diaporama.html"
             self.resname="resume.html"
-            self.resume="Résumé du film"
+            self.resume=u"Résumé du film"
             self.titre=titre_fr
             self.nomMois=langues.mois_nom[self.mois]
-            self.link="""Français<a href="presentation_EN.html"> / English</a>"""
+            self.link=u"""Français<a href="presentation_EN.html"> / English</a>"""
         elif self.lang=="EN":
-            self.slogan="Working for Christian unity and for peace in the world !"
-            self.discover="Discover the NetForGod fraternity"
-            self.presname="presentation_EN.html"
+            self.slogan=u"Working for Christian unity and for peace in the world !"
+            self.discover=u"Discover the NetForGod fraternity"
+            self.presname=u"presentation_EN.html"
             self.diaponame="diaporama_EN.html"
             self.resname="resume_EN.html"
-            self.resume="Movie synopsis"
+            self.resume=u"Movie synopsis"
             self.titre=titre_en
             self.nomMois=langues.month_name[self.mois]
-            self.link="""English <a href="presentation.html">/ Français</a>"""
+            self.link=u"""English <a href="presentation.html">/ Français</a>"""
     
     def do_html(self,lang="FR"):
         """docstring for do_html"""
@@ -345,19 +345,19 @@ function openWindow(url,name)
         formvar["flat_title"]=" - ".join(self.titre)
         hr=0
         if op.exists(op.join(self.dir,self.resname)):
-            formvar["resume"]="""<hr width="30%%"><a style="font-size: 16px" href="javascript:openWindow('%s','%s')">%s</A> <br>"""%(self.resname,self.resume,self.resume)
+            formvar["resume"]=u"""<hr width="30%%"><a style="font-size: 16px" href="javascript:openWindow('%s','%s')">%s</A> <br>"""%(self.resname,self.resume,self.resume)
             hr=1
         else:
-            formvar["resume"]=''
+            formvar["resume"]=u''
         if op.exists(op.join(self.dir,self.diaponame)):
             if hr==0:
                 hr='<hr width="30%%">'
             else:
                 hr=''
-            formvar["diapo"]='%s<a style="font-size: 16px" href="%s">%s</A> <br>'%(hr,self.diaponame,"Diaporama")
+            formvar["diapo"]=u'%s<a style="font-size: 16px" href="%s">%s</A> <br>'%(hr,self.diaponame,"Diaporama")
         else:
-            formvar["diapo"]=''
-        HTML=file(op.join(self.dir,self.presname),"w")
+            formvar["diapo"]=u''
+        HTML=codecs.open(op.join(self.dir,self.presname),mode="w",encoding='utf-8')
         HTML.writelines(self.texte%formvar)
         HTML.close()
 
@@ -369,7 +369,7 @@ class resume:
         imlist = glob.glob(op.join(self.dir,"textes","resume_*.txt"))
         self.empty = len(imlist)==0 # tells that there is no resume available
         self.setLang(lang)
-        self.texte="""\
+        self.texte=u"""\
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -410,7 +410,7 @@ class resume:
         formvar={}
         formvar["resume"]=self.resume
         formvar["resume_text"]="<br>".join(self.resume_text)
-        HTML=file(op.join(self.dir,self.resname),"w")
+        HTML=codecs.open(op.join(self.dir,self.resname),mode="w",encoding='utf-8')
         HTML.writelines(self.texte%formvar)
         HTML.close()
 
@@ -426,7 +426,7 @@ class video:
         self.empty = len(imlist)==0 # tells that there is no resume available
         (self.annee,self.mois)=current_date(self.dir)
         self.setLang(lang)
-        self.texte="""\
+        self.texte=u"""\
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -472,27 +472,27 @@ function openWindow(url,name)
         (titre_fr,titre_en)=current_title(self.dir)
         (annee,mois)=current_date(self.dir)
         if self.lang=="FR":
-            self.slogan="Au service de l'UNITÉ des CHRÉTIENS et de la PAIX dans le MONDE."
-            self.discover="Découvir la fraternité NetForGod"
+            self.slogan=u"Au service de l'UNITÉ des CHRÉTIENS et de la PAIX dans le MONDE."
+            self.discover=u"Découvir la fraternité NetForGod"
             self.presname="presentation.html"
             self.diaponame="diaporama.html"
             self.resname="resume.html"
             self.videoname="video.html"
-            self.resume="Résumé du film"
+            self.resume=u"Résumé du film"
             self.titre=titre_fr
             self.nomMois=langues.mois_nom[self.mois]
-            self.link="""Français<a href="presentation_EN.html"> / English</a>"""
+            self.link=u"""Français<a href="presentation_EN.html"> / English</a>"""
         elif self.lang=="EN":
-            self.slogan="Working for Christian unity and for peace in the world !"
-            self.discover="Discover the NetForGod fraternity"
+            self.slogan=u"Working for Christian unity and for peace in the world !"
+            self.discover=u"Discover the NetForGod fraternity"
             self.presname="presentation_EN.html"
             self.diaponame="diaporama_EN.html"
             self.resname="resume_EN.html"
             self.videoname="video_EN.html"
-            self.resume="Movie synopsis"
+            self.resume=u"Movie synopsis"
             self.titre=titre_en
             self.nomMois=langues.month_name[self.mois]
-            self.link="""English <a href="presentation.html">/ Français</a>"""
+            self.link=u"""English <a href="presentation.html">/ Français</a>"""
 
     
     def do_html(self,lang="FR"):
@@ -506,7 +506,7 @@ function openWindow(url,name)
         formvar["lang"]=self.lang
         formvar["flat_title"]=" - ".join(self.titre)
         formvar["file"]="test.flv"
-        HTML=file(op.join(self.dir,self.videoname),"w")
+        HTML = codecs.open(op.join(self.dir,self.videoname),mode="w",encoding='utf-8')
         HTML.writelines(self.texte%formvar)
         HTML.close()
 
@@ -520,7 +520,7 @@ class VodPage:
         self.debug = config.debug
         self.dir = config.video_dir
         self.TmplDir = config.TmplDir
-        self.chmod()
+#        self.chmod()
         self.flv_list = self.do_flv_list()
         self.titre_list = self.do_titre_list()
         self.langues_list = self.do_lang_list()
@@ -553,11 +553,11 @@ class VodPage:
     def html_base_liste(self):
         """charge la base de la page html pour le VOD en mode liste"""
         if (self.langue == "FR"):
-            VOD=file(op.join(self.TmplDir, "vod_list_fr.html"))
+            VOD = codecs.open(op.join(self.TmplDir, "vod_list_fr.html"), encoding='utf-8')
             r = "".join(VOD.readlines())
             VOD.close()
         else:
-            VOD=file(op.join(self.TmplDir, "vod_list_en.html"))
+            VOD = codecs.open(op.join(self.TmplDir, "vod_list_en.html"), encoding='utf-8')
             r = "".join(VOD.readlines())
             VOD.close()
         return r
@@ -566,12 +566,12 @@ class VodPage:
         """charge la base de la page html pour le VOD."""
 # base html de la page -  2 versions _fr et _en - les champs %s sont remplacés au moment de l'utilisation
         if (self.langue == "FR"):
-            VOD=file(op.join(self.TmplDir,"vod_fr.html"))
-            r = "".join(VOD.readlines())
+            VOD = codecs.open(op.join(self.TmplDir,"vod_fr.html"), encoding='utf-8')
+            r = u"".join(VOD.readlines())
             VOD.close()
         else:
-            VOD=file(op.join(self.TmplDir,"vod_en.html"))
-            r = "".join(VOD.readlines())
+            VOD = codecs.open(op.join(self.TmplDir,"vod_en.html"), encoding='utf-8')
+            r = u"".join(VOD.readlines())
             VOD.close()
         return r
     ###################################################################################
@@ -579,10 +579,10 @@ class VodPage:
         """ cree la page html VOD dans la langue cible"""
         # calcule toutes les parties variables
         flv = str(self.flv_list).replace('[','').replace(']','')
-        titre = ""
+        titre = u""
         for i in self.titre_list:
             if titre == "":
-                titre = "'" + i + "'"
+                titre = u"'" + i + u"'"
             else:
                 titre = titre + ", '" + i + "'"
         langs = repr(self.langues_list).replace('[','').replace(']','')
@@ -718,7 +718,7 @@ class VodPage:
         t = []
         for i in self.flv_list:
             try:
-                f=file ( op.join( i, "textes", "titre_" + self.langue + ".txt"))
+                f = codecs.open( op.join( i, "textes", "titre_" + self.langue + ".txt"), encoding='utf-8')
                 tx = clean(f.read())
                 t.append(tx)
                 f.close()
@@ -784,9 +784,9 @@ class VodPage:
             (titre,affiche,date) = self.do_ti_aff_date(i)
     # base html de la case pour une emission
             if index<6:
-                emision_fr = """<span class="tdemission%s"><a href="#" onclick="javascript:PresMois(%d)"><img border="0" class="affiche-2" alt="affiche" src="%s"/><br clear="all"/><span class="titre"> %s </span></a></span>\n""" % (cote,index_em, affiche,titre)
+                emision_fr = u"""<span class="tdemission%s"><a href="#" onclick="javascript:PresMois(%d)"><img border="0" class="affiche-2" alt="affiche" src="%s"/><br clear="all"/><span class="titre"> %s </span></a></span>\n""" % (cote,index_em, affiche,titre)
             else:
-                emision_fr = """<span class="tdemission%s_sm"><a href="#" onclick="javascript:PresMois(%d)"><span class="titre"> %s </span></a></span>\n""" % (cote,index_em,titre)
+                emision_fr = u"""<span class="tdemission%s_sm"><a href="#" onclick="javascript:PresMois(%d)"><span class="titre"> %s </span></a></span>\n""" % (cote,index_em,titre)
             if (cote == "g"):
                 cote = "d"
             else:
@@ -800,14 +800,14 @@ class VodPage:
         """ fabrique la table des emissions précédentes pour la page liste """
         texte=""
         # base html de la case pour une emission
-        base="""
+        base = u"""
         <div class="ltfilm">
         <a href="/s/%(perm)s?dt=%(dt)s&amp;lg=%(langue)s"><img border="0" class="affiche-2" alt="affiche" src="%(affiche)s"/></a>
         <p class="date-lt">%(date)s</p>
         <p class="lttitre">%(titre)s</p>
         </div>
         """
-        texte=""
+        texte = u""
         for dir in self.flv_list:
             (titre,affiche,date) = self.do_ti_aff_date(dir)
             [(dt)] = re.findall("FOI_(\d\d_\d\d)",dir)
@@ -816,7 +816,7 @@ class VodPage:
                 perm = "perm.php"
             else:
                 perm = "permn.php"
-            texte=texte+base % vars()
+            texte += base % vars()
         return (texte)
     
     ###################################################################################
@@ -824,7 +824,7 @@ class VodPage:
         """ fabrique la presentation du mois courant """
         i=self.flv_list[0]
         (titre,affiche,date) = self.do_ti_aff_date(i)
-        mois = """<p class="titre-mois"> %s </p><div class="aff-mois"><a href="#" onclick="javascript:PresMois(0)">
+        mois = u"""<p class="titre-mois"> %s </p><div class="aff-mois"><a href="#" onclick="javascript:PresMois(0)">
                  <img border="0" class="affiche-1" alt="affiche" src="%s"/></a></div>
                  <div class="texte-mois"> </div>""" % (titre, affiche)
         return(mois)
@@ -833,7 +833,7 @@ class VodPage:
     def do_ti_aff_date(self,dirb):
         """utilitaire pour calculer le nom et le titre"""
         try:
-            f = file(  op.join(dirb, "textes", "titre_" + self.langue + ".txt"))
+            f = codecs.open(  op.join(dirb, "textes", "titre_" + self.langue + ".txt"), encoding="utf-8")
             titre = clean(f.read())
             f.close()
         except:

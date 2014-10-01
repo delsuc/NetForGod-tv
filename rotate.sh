@@ -1,7 +1,7 @@
 # to keep a set of compressed log files
 # typically called regularly
 
-NLOG=20
+NLOG=30
 
 cd logs
 

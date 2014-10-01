@@ -62,8 +62,8 @@ $calcul_vod = "python $baseprgm/do_vod.py";
 $calcul_tele = "python $baseprgm/do_tele.py";
 
 # la commande qui relance le make all
-#$calcul_makeall = "pwd; ./auto.sh";
-$calcul_makeall = "if ! [ -f FOI-working.lock ]; then touch FOI-working.lock; make  -C $basevideos  -f $baseprgm/Makefile  all; python do_vod.py; rm FOI-working.lock; else echo XX un calcul est deja actif XX; fi";
+$calcul_makeall = "cd $MAKEdir; pwd; ./auto.sh";
+#$calcul_makeall = "if ! [ -f FOI-working.lock ]; then touch FOI-working.lock; make  -C $basevideos  -f $baseprgm/Makefile  all; python do_vod.py; rm FOI-working.lock; else echo XX un calcul est deja actif XX; fi";
 
 # utilitaire pour les url cod'es
 

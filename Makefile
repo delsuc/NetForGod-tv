@@ -102,7 +102,7 @@ localTi = $(wildcard textes/titre*.txt)
 localRes = $(wildcard textes/resume*.txt)
 
 # localIm is the list of images for diaporama
-localIm = $(wildcard images/photo*.jpg) $(wildcard images/photo*.txt)
+localIm = $(wildcard images/photo*.jpg) $(wildcard images/photo*.txt) $(wildcard images/legend*.txt)
 
 # parametres codés dans le fichier parametres.xml, et lu par le prgm xml_parse.py
 #       python xml_parse.py parametres.xml cle val_par_defaut
@@ -196,7 +196,7 @@ link:
 lpages: diaporama.html resume.html presentation.html .htaccess
 
 # construit le diaporama
-diaporama.html : $(localIm) $(localTi)
+diaporama.html : $(localIm)   # $(localTi)
 	python $(MAKEdir)/diaporama.py .
 
 # construit la page de présentation de la video

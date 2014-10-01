@@ -112,7 +112,7 @@ computing ...
 <li><i><a href="http://<?php echo $WEBSITE; ?>/VOD/index_en.html" target="_blank">Watch the other movies online</a></i></li>
 <hr width="30%">
 <p><a href="/media/conseils.html" target="_blank">Quelques conseils</a> pour regarder ce film<br/>
-<i><a href="/media/advices.html" target="_blank">Some advices</a> to watch this movie</i></P>
+<i><a href="/media/advices.html" target="_blank">Some advice</a> to watch this film</i></P>
 <hr width="100%">
 </div>
 <p style="text-align:center"> FRATERNITÉ ŒCUMÉNIQUE INTERNATIONALE - - NET FOR GOD - - INTERNATIONAL ECUMENICAL FRATERNITY </p>

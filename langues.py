@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 """
@@ -29,19 +30,19 @@ month_name =[" ","January","February","March","April","May","June","July","Augus
 langues = {'FR':u'Français', 'EN':u'Anglais', 'DE':u'Allemand', 'ES':u'Espagnol', 'IT':u'Italien','PT':u'Portugais',
         'HU':u'Hongrois','NL':u'Néerlandais','CS':u'Tchèque','SK':u'Slovaque','LV':u'Letton','PL':u'Polonais','RU':u'Russe', 'LT':u'Lituanien',
         'TR':u'Turc', 'AR':u'Arabe','HY':u'Arménien','ZH':u'Chinois','JA':u'Japonais','VI':u'Vietnamien',
-        'MOS':u'Mooré','LN':u'Lingala','RN':u'Kirundi','MU':u'Créole Mauricien','MG':u'Malgache'}
+        'MOS':u'Mooré','LN':u'Lingala','RN':u'Kirundi','MU':u'Créole Mauricien','MG':u'Malgache','NG':u'Ngambaye'}
 
 # le nom des langues en anglais
 languages = {'FR':'French', 'EN':'English', 'DE':'German', 'ES':'Spanish','IT':'Italian','PT':'Portuguese',
         'HU':'Hungarian','NL':'Dutch','CS':'Czech','SK':'Solvak','LV':'Latvian','PL':'Polish','RU':'Russian', 'LT':'Lithuanian',
         'TR':'Turkish','AR':'Arabic','HY':'Armenian','ZH':'Chinese','JA':'Japanese','VI':'Vietnamese',
-        'MOS':'Mossi','LN':'Lingala','RN':'Kirundi','MU':'Mauritian Creole','MG':'Malagasy'}
+        'MOS':'Mossi','LN':'Lingala','RN':'Kirundi','MU':'Mauritian Creole','MG':'Malagasy','NG':u'Ngambay'}
 
 # le nom des langues dans leur propres langue
 lang_self = {'FR':u'Français', 'EN':u'English', 'DE':u'Deutsch', 'ES':u'Español','IT':u'Italiano','PT':u'Português',
         'HU':u'Magyar','NL':u'Nederlands','CS':u'Česky','SK':u'Slovenčina','LV':u'Latviski','PL':u'Polski','RU':u'Pусский', 'LT':u'Lietuviškai',
         'TR':u'Türkçe','AR':u'العربية','HY':u'Հայերեն','ZH':u'漢語','JA':u'日本語','VI':u'Tiếng Việt',
-        'MOS':u'Mòoré','LN':u'Lingala','RN':u'Kirundi','MU':u'Kreol moricien','MG':u'Malagasy'}
+        'MOS':u'Mòoré','LN':u'Lingala','RN':u'Kirundi','MU':u'Kreol moricien','MG':u'Malagasy','NG':u'Ngambaye'}
 
 # le mot résumé dans qq langues
 resume = {
@@ -62,7 +63,7 @@ resume = {
     "SK" : u"Zhrnutie"}
 
 # l'ordre des langues
-ordrelangues = 'FR EN DE ES IT PT HU NL CS SK LV LT PL RU TR HY AR ZH JA VI MOS LN RN MU MG'
+ordrelangues = 'FR EN DE ES IT PT HU NL CS SK LV LT PL RU TR HY AR ZH JA VI MOS LN RN MU MG NG'
 
 def create_js(filename="langues.js"):
     """crée un fichier javascript qui sera utilisable dans les pages WEB"""
@@ -144,7 +145,7 @@ def report():
             res = resume[l]
         except:
             res = "-"
-        print "%3s : %15s\t-\t%15s\t-\t%15s\t-\t%15s"%(l, langues[l], languages[l], lang_self[l], res)
+        print (u"%3s : %15s\t-\t%15s\t-\t%15s\t-\t%15s"%(l, langues[l], languages[l], lang_self[l], res)).encode('utf-8')
 #        print (l,langues[l],languages[l],lang_self[l])
 
 # le code suivant n'est exécuté que si on appelle directement le programme

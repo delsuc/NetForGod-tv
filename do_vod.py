@@ -14,6 +14,7 @@ les noms des fichiers sont définit ci-dessous
 import os, sys
 from langues import create_js
 from FOIlib import VodPage
+import codecs
 
 debug = 0 # mettre à 1 pour debugger, le nom des fichiers de sortie est changé et le prgm donne des info
 
@@ -69,18 +70,18 @@ def main(config):
     os.chdir(config.working_dir)
     # pages en français
     H1 = VodPage(config, "FR")
-    ffr = open(os.path.join(config.working_dir, config.page_name),'w')
+    ffr = codecs.open(os.path.join(config.working_dir, config.page_name),mode='w', encoding="utf-8")
     ffr.writelines( H1.vod_html() )
     ffr.close()
-    fgr = open(os.path.join(config.working_dir, config.liste_name),'w')
+    fgr = codecs.open(os.path.join(config.working_dir, config.liste_name),mode='w', encoding="utf-8")
     fgr.writelines( H1.liste_html() )
     fgr.close()
     # pages en anglais
     H2 = VodPage(config, "EN")
-    ffe = file(os.path.join(config.working_dir, config.page_name_en),'w')
+    ffe = codecs.open(os.path.join(config.working_dir, config.page_name_en),mode='w', encoding="utf-8")
     ffe.writelines( H2.vod_html() )
     ffe.close()
-    fge = open(os.path.join(config.working_dir, config.liste_name_en),'w')
+    fge = codecs.open(os.path.join(config.working_dir, config.liste_name_en),mode='w', encoding="utf-8")
     fge.writelines( H2.liste_html() )
     fge.close()
     # langues.js remis à jour - nécessaire que quand on change langues.py, mais fait ici "pour être sûr"

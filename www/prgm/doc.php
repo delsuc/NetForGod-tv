@@ -99,7 +99,8 @@
                 <li><span class="ex">photoxx.jpg</span>  les photos extraites du film, numérotées par ordre d'apparition dans le diaporama</li> 
                 <li><span class="ex">photoxx_LL.txt</span>  les légendes des photos avec les mêmes noms</li>
                 ou bien
-                <li><span class="ex">legendes_LL.txt</span>  les légendes des photos tout dans un seul fichier (<em>pas en core actif</em>)</li>
+                <li><span class="ex">legendes_LL.txt</span>  les légendes des photos tout dans un seul fichier 
+</li>
                 <pre>
             photo01 : texte de la légende
             photo02 : texte de la légende

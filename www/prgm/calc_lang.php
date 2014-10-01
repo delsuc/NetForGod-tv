@@ -1,24 +1,28 @@
 <?php
  include_once("minitete.php");
  include_once("configuration.php");
-
-@ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
+ include_once("langues.php");
  
 ?>
 
 <H1>Liste des langues disponibles</H1>
 
-<pre>
+<table border="1" cellspacing="1" cellpadding="7" style="text-align:center">
+<tr>
+<th>code</th>
+<th>en français</th>
+<th>en anglais</th>
+<th>dans la langue</th>
+<th>le mot résumé</th>
+</tr>
 <?php
-@ob_flush();  flush();
-    sleep(1);
-    system("cd $MAKEdir; python langues.py");
-@ob_flush();  flush();
-
+foreach ($ordrelangues as $l) {
+  $res = "-";
+  @$res = $resume[$l];
+  echo "<tr><td>$l</td><td>$langues[$l]</td><td>$languages[$l]</td><td>$lang_self[$l]</td><td>$res</td></tr>";
+}
 ?>
-
-</pre>
-
+</table>
 <form>
 <input type=button value="Fermer cette fenêtre" onClick="javascript:window.close();">
 </form> 

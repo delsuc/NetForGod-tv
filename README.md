@@ -1,11 +1,11 @@
 # README #
 
-
-### What is this repository for? ###
-
 This repository contains the code which handles the www.netforgod.tv
 
 *This README is still to be done*
+
+
+---
 
 ### How do I get set up? ###
 

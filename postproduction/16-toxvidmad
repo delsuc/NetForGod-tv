@@ -1,0 +1,10 @@
+# codage du fichier $1 en mpeg4 vers $2
+
+~/bin/ffmpeg -i $1 -an -c:v mpeg4 -b:v 1658k -bt 142k -maxrate 3316k -bufsize 663.2k -r 25 -s 720x576 -aspect 16:9 -trellis 0 -me_range 16 -b_strategy 1 -mbd rd -g 200 -qmin 3 -qmax 51 -qdiff 4 -sc_threshold 40 -sn -f avi -threads 8 -vtag DX50 -deinterlace -pass 1 -f avi -y /dev/null
+~/bin/ffmpeg -i $1 -an -c:v mpeg4 -b:v 1658k -bt 142k -maxrate 3316k -bufsize 663.2k -r 25 -s 720x576 -aspect 16:9 -trellis 0 -me_range 16 -b_strategy 1 -mbd rd -g 200 -qmin 3 -qmax 51 -qdiff 4 -sc_threshold 40 -sn -f avi -threads 8 -vtag DX50 -deinterlace -pass 2 -vtag DX50 -f avi -y $2
+
+echo
+echo "Fin du codage"
+echo
+
+

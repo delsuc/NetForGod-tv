@@ -1,0 +1,12 @@
+# codage du fichier $1 en mpeg4 vers $2
+
+#ffmpeg -i $1 -vcodec mpeg4 -b 1000k -me epzs -g 250 -bf 2 -aspect 16:9  -s 720x576  -deinterlace -pass 1 -f avi -y /dev/null
+#ffmpeg -i $1 -vcodec mpeg4 -b 1000k -me epzs -g 250 -bf 2 -aspect 16:9  -s 720x576  -deinterlace -pass 2  -vtag DX50 -f avi -y $2
+~/bin/ffmpeg -i $1 -vcodec mpeg4 -b 1000k -g 250 -bf 2 -aspect 16:9  -s 720x576  -deinterlace -pass 1 -f avi -y /dev/null
+~/bin/ffmpeg -i $1 -vcodec mpeg4 -b 1000k -g 250 -bf 2 -aspect 16:9  -s 720x576  -deinterlace -pass 2  -vtag DX50 -f avi -y $2
+
+echo
+echo "Fin du codage"
+echo
+
+

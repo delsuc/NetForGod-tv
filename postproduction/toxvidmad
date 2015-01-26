@@ -1,0 +1,10 @@
+# codage du fichier $1 en mpeg4 vers $2
+
+~/bin/ffmpeg -i $1 -vcodec mpeg4 -b 1000k -me epzs -g 250 -aspect 4:3  -s 656x488 -cropleft 8 -cropright 8 -croptop 8  -deinterlace -pass 1 -f avi -y /dev/null
+~/bin/ffmpeg -i $1 -vcodec mpeg4 -b 1000k -me epzs -g 250 -aspect 4:3  -s 656x488 -cropleft 8 -cropright 8 -croptop 8 -deinterlace -pass 2  -vtag DX50 -f avi -y $2
+
+echo
+echo "Fin du codage"
+echo
+
+

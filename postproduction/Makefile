@@ -45,7 +45,7 @@ textDIR = textes
 
 # fin de la configuration
 #######################################
-# V4 était sur sual4 - crashé - V5 est la nouvelle version
+# V4 était sur saul4 - crashé - V5 est la nouvelle version
 VERSION = V5
 DATE = 26-Jan-2015
 AUTHOR = Marc-André
@@ -56,10 +56,12 @@ AUTHOR = Marc-André
 # FOI*   this dir is used by the top most make
 #foiDIR= $(wildcard FOI*)
 foiDIR= $(wildcard */)
+# FOI*/*.mp4
+VIDMP4= $(wildcard $(addsuffix *.mp4,$(foiDIR)))
 # FOI*/*.mpg
 VIDMPG= $(wildcard $(addsuffix *.mpg,$(foiDIR)))
 # FOI*/*.avi
-VIDAVI= $(patsubst %.mpg,%.avi,$(VIDMPG))
+VIDAVI= $(patsubst %.mpg,%.avi,$(VIDMPG)) $(patsubst %.mp4,%.avi,$(VIDMP4))
 # FOI*/*_divx.avi
 DIVX= $(patsubst %.avi,%_divx.avi,$(VIDAVI))
 # FOI*/sons/*.wav
@@ -157,7 +159,8 @@ help: hello
 
 #  pour tout faire
 .PHONY: all
-all: hello clean-ln image ac3 mp3 transfert
+all: hello clean-ln image ac3 mp3
+# transfert
 
 # dit bonjour poliment
 .PHONY: hello
@@ -170,6 +173,19 @@ hello:
 .PHONY: clean-ln
 clean-ln:
 	-find -L . -lname "*" -print -delete
+
+# compresse le .mpg en.avi - sans les sons
+.PHONY: image
+image: $(VIDAVI)
+
+# compresse tout les ac3 en mp3
+.PHONY: mp3
+mp3: $(SONSMP3)
+
+# compresse tout les wav en ac3
+.PHONY: ac3
+ac3: $(SONSAC3)
+
 
 #  pour transferer tous les fichiers sur le serveur
 #  #  inclus tous les sous-dossier,:
@@ -192,18 +208,6 @@ divx: image mp3
 	do \
 		(cd $$dir; $(MAKE) --no-print-directory -f ../Makefile localdivx); \
 	done
-
-# compresse le .mpg en.avi - sans les sons
-.PHONY: image
-image: $(VIDAVI)
-
-# compresse tout les ac3 en mp3
-.PHONY: mp3
-mp3: $(SONSMP3)
-
-# compresse tout les wav en ac3
-.PHONY: ac3
-ac3: $(SONSAC3)
 
 # dans chaque directory, fabrique les divx de chaque langues (pas apellé par 'all', seulement par divx)
 .PHONY: localdivx
@@ -234,14 +238,31 @@ localdivx: $(localDIVX)
 	cd $(dir $@); ln -s  $(notdir $@)  video.avi  
 	#cd $(*D); ln -s  $(*F)  video.avi  
 
+%_HD.mp4: %.mp4
+	@echo conversion de $@
+	@if [ $(ASPECT) == "4:3" ]; then \
+	  echo format 4:3; \
+	  $(MPG2AVI-43) $*.mpg $*.avi; \
+	fi
+	@if [ $(ASPECT) == "16:9" ]; then \
+	  echo format 16:9; \
+	  $(MPG2AVI-169) $*.mpg $*.avi; \
+	fi
+	cd $(dir $@); ln -s  $(notdir $@)  video.avi  
+	#cd $(*D); ln -s  $(*F)  video.avi  
+
 
 %_divx.avi: %.mp3
 	-$(MUX2AVI) -i sons/$*.mp3 -i video.avi -acodec copy -vcodec copy -y $*_divx.avi
-# regles pour passer en minuscule
+# regles pour passer en minuscule les fichiers d'entrée
 %.wav: %.WAV
 	mv $*.WAV $*.wav
 %.ac3: %.AC3
 	mv %.AC3 %.ac3
+%.mpg: %.MPG
+	mv %.MPG %.mpg
+%.mp4: %.MP4
+	mv %.MP4 %.mp4
 
 # regle pour le debogage
 check:

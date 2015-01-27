@@ -8,7 +8,7 @@
 # utilise et nécessite gnu make (doc complete  : http://www.gnu.org/software/make/manual/html_node/index.html )
 #
 # make est utilisé à la racine du projet pour tout tester
-# make est ensuite appelé dans les sous-directory FOI* de maniÃ¨re récursive pour faire les fichiers
+# make est ensuite appelé dans les sous-directory FOI* de manière récursive pour faire les fichiers
 
 #######################################
 # partie adaptable à la configuration
@@ -86,10 +86,10 @@ SHELL = /bin/bash
 
 #parse du fichier de parametre
 #Ce sont des definitions, les appel sont faits au moment de l'usage (variable "recursively expanded")
-ASPECT =  $(shell ./xml_parse.py $(dir $@)/parametres.xml aspect 4:3)
+ASPECT =  $(shell ~/bin/xml_parse.py $(dir $@)/parametres.xml aspect 4:3)
 
 #######################################
-# liste des actions, l'action par défaut est la premiÃ¨re - ic la doc -
+# liste des actions, l'action par défaut est la première - ic la doc -
 #######################################
 
 .PHONY: default

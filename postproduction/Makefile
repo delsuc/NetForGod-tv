@@ -85,10 +85,12 @@ vpath %.mp3 sons
 
 #
 SHELL = /bin/bash
-
-#parse du fichier de parametre
+#variables calculées
 #Ce sont des definitions, les appel sont faits au moment de l'usage (variable "recursively expanded")
+#parse du fichier de parametre
 ASPECT =  $(shell ~/bin/xml_parse.py $(dir $@)/parametres.xml aspect 4:3)
+#determine le nbre de processor en comptant dans /proc/cpuinfo
+NCPU = $(shell awk  "/processor/ {i++} END {print i}" /proc/cpuinfo )
 
 #######################################
 # liste des actions, l'action par défaut est la première - ic la doc -
@@ -225,18 +227,29 @@ localdivx: $(localDIVX)
 %.mp3: %.ac3
 	-$(FFMPEG) -i $*.ac3 $(AC32MP3)  -y $*.mp3
 
-%.avi: %.mpg
-	@echo conversion de $@
+%.avi: %.mp4
+	@echo conversion de $<
 	@if [ $(ASPECT) == "4:3" ]; then \
 	  echo format 4:3; \
-	  $(MPG2AVI-43) $*.mpg $*.avi; \
+	  $(MPG2AVI-43) $< $*.avi; \
 	fi
 	@if [ $(ASPECT) == "16:9" ]; then \
 	  echo format 16:9; \
-	  $(MPG2AVI-169) $*.mpg $*.avi; \
+	  $(MPG2AVI-169) $< $*.avi; \
 	fi
 	cd $(dir $@); ln -s  $(notdir $@)  video.avi  
-	#cd $(*D); ln -s  $(*F)  video.avi  
+
+%.avi: %.mpg
+	@echo conversion de $<
+	@if [ $(ASPECT) == "4:3" ]; then \
+	  echo format 4:3; \
+	  $(MPG2AVI-43) $< $*.avi; \
+	fi
+	@if [ $(ASPECT) == "16:9" ]; then \
+	  echo format 16:9; \
+	  $(MPG2AVI-169) $< $*.avi; \
+	fi
+	cd $(dir $@); ln -s  $(notdir $@)  video.avi  
 
 %_HD.mp4: %.mp4
 	@echo conversion de $@

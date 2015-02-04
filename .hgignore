@@ -5,4 +5,12 @@ syntax: glob
 .DS_Store
 *.log
 *.gz
+*.avi
+*.mp4
+*.mpg
+*.ac3
+*.wav
+*.mp3
+*~
+*.pyc
 

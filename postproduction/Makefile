@@ -28,8 +28,8 @@ BCK-DIR = /home/netforgod/post_prod_log
 
 # commandes pour les codeurs
 FFMPEG = nice ~/bin/ffmpeg -benchmark 
-MPG2AVI-43 = ~/bin/toxvidmad # pour les formats 4:3
-MPG2AVI-169 = ~/bin/16-toxvidmad # pour les 16:9
+MPG2AVI-43 = ~/bin/toxvid # pour les formats 4:3
+MPG2AVI-169 = ~/bin/16-toxvid # pour les 16:9
 WAV2AC3 = -ar 48000 -ab 224k 
 AC32MP3 = -acodec mp3 -ar 44100 -ab 128k 
 MUX2AVI = $(FFMPEG)
@@ -239,19 +239,7 @@ localdivx: $(localDIVX)
 	fi
 	cd $(dir $@); ln -s  $(notdir $@)  video.avi  
 
-%.avi: %.mpg
-	@echo conversion de $<
-	@if [ $(ASPECT) == "4:3" ]; then \
-	  echo format 4:3; \
-	  $(MPG2AVI-43) $< $*.avi; \
-	fi
-	@if [ $(ASPECT) == "16:9" ]; then \
-	  echo format 16:9; \
-	  $(MPG2AVI-169) $< $*.avi; \
-	fi
-	cd $(dir $@); ln -s  $(notdir $@)  video.avi  
-
-%_HD.mp4: %.mp4
+%.HD: %.mp4
 	@echo conversion de $@
 	@if [ $(ASPECT) == "4:3" ]; then \
 	  echo format 4:3; \

@@ -1,0 +1,43 @@
+# codage du fichier $1 vers $2
+# codage HD 720p 16:9
+# codec h264 2100kb/sec  2 passes
+
+usage() {
+echo usage: $0 -a [4:3 16:9] filein filout
+}
+
+ASPECT=16:9
+
+# recupere les options (-a ASPECT et -h)
+set -- `getopt ha: $*`
+for arg in $*
+do
+    case $arg in
+    -a) ASPECT=$2;  shift 2;;
+    -h) usage; exit 0;;
+    --) shift; break;;
+    esac
+done
+
+if [ $# -ne 2 ]
+then
+    usage
+    exit 1
+fi
+
+
+# compte les CPU
+NCPU=`awk  "/processor/ {i++} END {print i}" /proc/cpuinfo`
+
+ARG="-vcodec h264 -b 2100k -aspect $ASPECT -s 960x720 -deinterlace"
+
+echo Codage HD sur $NCPU processeurs  de $1 vers $2 en $ASPECT
+
+ffmpeg -threads $NCPU -i $1 $ARG -pass 1 -passlogfile HD_pass -f mp4 -y /dev/null
+ffmpeg -threads $NCPU -i $1 $ARG -pass 2 -passlogfile HD_pass -f mp4 -y $2
+
+rm HD_pass
+
+echo "Fin du codage HD"
+
+

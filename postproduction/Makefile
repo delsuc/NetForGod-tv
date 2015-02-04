@@ -28,8 +28,8 @@ BCK-DIR = /home/netforgod/post_prod_log
 
 # commandes pour les codeurs
 FFMPEG = nice ~/bin/ffmpeg -benchmark 
-MPG2AVI-43 = ~/bin/toxvid # pour les formats 4:3
-MPG2AVI-169 = ~/bin/16-toxvid # pour les 16:9
+TOXVID = ~/bin/toxvid # pour les SD DivX compatible en 576p
+TOHD = ~/bin/toHD     # pour les HD en 720p
 WAV2AC3 = -ar 48000 -ab 224k 
 AC32MP3 = -acodec mp3 -ar 44100 -ab 128k 
 MUX2AVI = $(FFMPEG)
@@ -229,28 +229,15 @@ localdivx: $(localDIVX)
 
 %.avi: %.mp4
 	@echo conversion de $<
-	@if [ $(ASPECT) == "4:3" ]; then \
-	  echo format 4:3; \
-	  $(MPG2AVI-43) $< $*.avi; \
-	fi
-	@if [ $(ASPECT) == "16:9" ]; then \
-	  echo format 16:9; \
-	  $(MPG2AVI-169) $< $*.avi; \
-	fi
-	cd $(dir $@); ln -s  $(notdir $@)  video.avi  
+	echo format $(ASPECT)
+	$(TOXVID) -a $(ASPECT) $< $*.avi
+	cd $(dir $@); ln -s  $(notdir $@)  video.avi
 
 %.HD: %.mp4
-	@echo conversion de $@
-	@if [ $(ASPECT) == "4:3" ]; then \
-	  echo format 4:3; \
-	  $(MPG2AVI-43) $*.mpg $*.avi; \
-	fi
-	@if [ $(ASPECT) == "16:9" ]; then \
-	  echo format 16:9; \
-	  $(MPG2AVI-169) $*.mpg $*.avi; \
-	fi
-	cd $(dir $@); ln -s  $(notdir $@)  video.avi  
-	#cd $(*D); ln -s  $(*F)  video.avi  
+	@echo conversion de $<
+	echo format $(ASPECT)
+	$(TOHD) -a $(ASPECT) $< $*.avi
+	cd $(dir $@); ln -s  $(notdir $@)  video.HD
 
 
 %_divx.avi: %.mp3

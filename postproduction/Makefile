@@ -14,7 +14,7 @@
 # partie adaptable à la configuration
 
 # address of the directory, which contains this Makefile and other scripts
-MAKEdir = /home/netforgod/export
+MAKEdir = /home/netforgod/netforgod-tv/postproduction
 
 # compte sur le serveur - doit être configuré en ssh
 # SSH-USER = user@nom.de.la.machine
@@ -208,7 +208,7 @@ transfert:
 divx: image mp3
 	@for dir in $(foiDIR); \
 	do \
-		(cd $$dir; $(MAKE) --no-print-directory -f ../Makefile localdivx); \
+		(cd $$dir; $(MAKE) --no-print-directory -f $(MAKEdir)/Makefile localdivx); \
 	done
 
 # dans chaque directory, fabrique les divx de chaque langues (pas apellé par 'all', seulement par divx)
@@ -227,17 +227,12 @@ localdivx: $(localDIVX)
 %.mp3: %.ac3
 	-$(FFMPEG) -i $*.ac3 $(AC32MP3)  -y $*.mp3
 
-%.avi: %.mp4
+# .HD est une pseud extension, pour un fichier qui est en fait un *.mp4
+%.HD %.avi: %.mp4
 	@echo conversion de $<
-	echo format $(ASPECT)
 	$(TOXVID) -a $(ASPECT) $< $*.avi
-	cd $(dir $@); ln -s  $(notdir $@)  video.avi
-
-%.HD: %.mp4
-	@echo conversion de $<
-	echo format $(ASPECT)
-	$(TOHD) -a $(ASPECT) $< $*.avi
-	cd $(dir $@); ln -s  $(notdir $@)  video.HD
+	$(TOHD) -a $(ASPECT) $< $*.HD
+	cd $(dir $@); ln -s  $(notdir $*.HD)  video.HD; ln -s  $(notdir $*.avi)  video.avi
 
 
 %_divx.avi: %.mp3
@@ -263,9 +258,10 @@ check:
 	@echo SONSAC3DONE $(SONSAC3DONE)
 	@echo SONSAC3 $(SONSAC3)
 	@echo SONSMP3 $(SONSMP3)
+        @echo NCPU $(NCPU)
 	@for dir in $(foiDIR); \
 	do \
-		(cd $$dir; $(MAKE) -n -w -f ../Makefile lcheck); \
+		(cd $$dir; $(MAKE) -n -w -f $(MAKEdir)/Makefile lcheck); \
 	done
 lcheck:
 	@echo localDIVX $(localDIVX)

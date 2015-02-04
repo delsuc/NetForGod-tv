@@ -161,8 +161,7 @@ help: hello
 
 #  pour tout faire
 .PHONY: all
-all: hello clean-ln image ac3 mp3
-# transfert
+all: hello clean-ln image ac3 mp3 transfert
 
 # dit bonjour poliment
 .PHONY: hello
@@ -198,12 +197,11 @@ ac3: $(SONSAC3)
 # pour que rsync fonctionne, il faut avoir fait un certificat ssh-keygen et opsé la clép publique sur SSH-USER
 .PHONY: transfert
 transfert: 
-	rsync  -a --copy-links \
-	--include '*/' --include 'video.avi' --include '*.jpg' --include '*.mp3' --include '*.txt' --include 'public' --include '*.xml' --exclude '*' \
-	. $(SSH-USER):$(VIDEO-DIR)
-	rsync -a auto.sh Makefile make.log $(SSH-USER):$(BCK-DIR)
+	rsync -a --copy-links \
+	--include '*/' --include 'video.avi' --include 'video.HD' --include '*.jpg' --include '*.mp3' --include '*.txt' --include 'public' --include '*.xml' --exclude '*' . $(SSH-USER):$(VIDEO-DIR)
+	cd $(MAKEdir); rsync -a auto.sh Makefile make.log $(SSH-USER):$(BCK-DIR)
 
-# pour créer localement les divx (pas apellé par 'all')
+# pour créer localement les divx (pas appelé par 'all')
 .PHONY: divx
 divx: image mp3
 	@for dir in $(foiDIR); \

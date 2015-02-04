@@ -258,7 +258,7 @@ check:
 	@echo SONSAC3DONE $(SONSAC3DONE)
 	@echo SONSAC3 $(SONSAC3)
 	@echo SONSMP3 $(SONSMP3)
-        @echo NCPU $(NCPU)
+	@echo NCPU $(NCPU)
 	@for dir in $(foiDIR); \
 	do \
 		(cd $$dir; $(MAKE) -n -w -f $(MAKEdir)/Makefile lcheck); \

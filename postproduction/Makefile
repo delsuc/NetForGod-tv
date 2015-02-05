@@ -32,7 +32,7 @@ FFMPEG = ~/bin/ffmpeg -benchmark
 TOXVID = ~/bin/toxvid # pour les SD DivX compatible en 576p
 TOHD = ~/bin/toHD     # pour les HD en 720p
 WAV2AC3 = -ar 48000 -ab 224k 
-AC32MP3 = -acodec mp3 -ar 44100 -ab 128k 
+AC32MP3 = -acodec mp3 -ar 44100 -ab 192k   # monté à 192 avec les video HD
 MUX2AVI = $(FFMPEG)
 
 # nom des projets

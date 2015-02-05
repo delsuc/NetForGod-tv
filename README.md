@@ -2,6 +2,14 @@
 
 This repository contains the code which handles the www.netforgod.tv
 
+The system is supposed to work on two independent machines
+* postproduction machine, which produces the various viedo and sound files
+* a webserver which distribute the films in their final form
+
+
+
+
+
 *This README is still to be done*
 
 

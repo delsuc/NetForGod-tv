@@ -30,7 +30,7 @@ fi
 NCPU=`awk  "/processor/ {i++} END {print i}" /proc/cpuinfo`
 
 # arguments pour ffmpeg en HD
-ARG="-vcodec h264 -b 2100k -aspect $ASPECT -s 960x720 -deinterlace"
+ARG="-vcodec h264 -b:v 2100k -aspect $ASPECT -s 960x720 -deinterlace"
 
 echo Codage HD sur $NCPU processeurs  de $1 vers $2 en $ASPECT
 

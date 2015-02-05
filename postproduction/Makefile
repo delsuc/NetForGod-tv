@@ -14,7 +14,8 @@
 # partie adaptable à la configuration
 
 # address of the directory, which contains this Makefile and other scripts
-MAKEdir = /home/netforgod/netforgod-tv/postproduction
+#MAKEdir = /home/netforgod/netforgod-tv/postproduction
+#set externaly
 
 # compte sur le serveur - doit être configuré en ssh
 # SSH-USER = user@nom.de.la.machine
@@ -27,7 +28,7 @@ VIDEO-DIR = /home/netforgod/www/videos
 BCK-DIR = /home/netforgod/post_prod_log
 
 # commandes pour les codeurs
-FFMPEG = nice ~/bin/ffmpeg -benchmark 
+FFMPEG = ~/bin/ffmpeg -benchmark 
 TOXVID = ~/bin/toxvid # pour les SD DivX compatible en 576p
 TOHD = ~/bin/toHD     # pour les HD en 720p
 WAV2AC3 = -ar 48000 -ab 224k 
@@ -201,7 +202,7 @@ transfert:
 		--include '*/' --include 'video.avi' --include 'video.HD' --include '*.jpg' --include '*.mp3' \
 		--include '*.txt' --include 'public' --include '*.xml' \
 		--exclude '*' . $(SSH-USER):$(VIDEO-DIR)
-	cd $(MAKEdir); rsync -a auto.sh Makefile make.log $(SSH-USER):$(BCK-DIR)
+	cd $(MAKEdir); rsync -a ~/bin/* Makefile make.log $(SSH-USER):$(BCK-DIR)
 
 # pour créer localement les divx (pas appelé par 'all')
 .PHONY: divx

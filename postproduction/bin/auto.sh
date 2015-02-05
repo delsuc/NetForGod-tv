@@ -1,10 +1,18 @@
 #!/bin/sh
 # ce script est appele par cron regulierement
 
+#Configuration
+
+MAKEdir=~/netforgod-tv/postproduction 
+WORKdir=~/export
+
 # on commence par dater dans le log
 echo "##################"
 date
 w
+
+cd $WORKdir
+pwd
 
 # enleve les liens casses
 find -L . -lname "*" -print -delete
@@ -15,7 +23,7 @@ if [ -f FOI-blocked.lock ]; then echo calcul bloque volntairement;
   exit;
 fi
 if ! [ -f FOI-working.lock ]; then touch FOI-working.lock; 
-   make -j 2 -s  -f Makefile  all;
+   make -s -f $MAKEdir/Makefile  all;
    rm FOI-working.lock;
 else 
   echo "calcul deja actif (fichier FOI-working.lock present)";

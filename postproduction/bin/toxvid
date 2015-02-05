@@ -1,6 +1,7 @@
 # codage du fichier $1 vers $2
 # codage SD compatible DivX (code DX50)
 # codec mpeg4 1658kb/sec  2 passes
+
 usage() {
 echo usage: $0 -a [4:3 16:9] filein filout
 }
@@ -27,12 +28,15 @@ fi
 # compte les CPU
 NCPU=`awk  "/processor/ {i++} END {print i}" /proc/cpuinfo`
 
+# arguments pour ffmpeg en xvid
 ARG="-an -c:v mpeg4 -b:v 1658k -bt 142k -maxrate 3316k -bufsize 663.2k -r 25 -s 720x576 -aspect $ASPECT -trellis 0 -me_range 16 -b_strategy 1 -mbd rd -g 200 -qmin 3 -qmax 51 -qdiff 4 -sc_threshold 40 -sn -f avi -vtag DX50 -deinterlace"
 
 echo Codage SD sur $NCPU processeurs  de $1 vers $2 en $ASPECT
 
-ffmpeg -threads $NCPU -i $1 $ARG -pass 1 -passlogfile SD_pass.log -f avi -y /dev/null
-ffmpeg -threads $NCPU -i $1 $ARG -pass 2 -passlogfile SD_pass.log -vtag DX50 -f avi -y $2
+ffmpeg -threads $NCPU -i $1 $ARG -pass 1 -passlogfile SD_pass -f avi -y /dev/null
+ffmpeg -threads $NCPU -i $1 $ARG -pass 2 -passlogfile SD_pass -vtag DX50 -f avi -y $2
+
+rm SD_pass*
 
 echo
 echo "Fin du codage SD"

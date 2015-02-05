@@ -29,15 +29,17 @@ fi
 # compte les CPU
 NCPU=`awk  "/processor/ {i++} END {print i}" /proc/cpuinfo`
 
+# arguments pour ffmpeg en HD
 ARG="-vcodec h264 -b 2100k -aspect $ASPECT -s 960x720 -deinterlace"
 
 echo Codage HD sur $NCPU processeurs  de $1 vers $2 en $ASPECT
 
-ffmpeg -threads $NCPU -i $1 $ARG -pass 1 -passlogfile HD_pass.log -f mp4 -y /dev/null
-ffmpeg -threads $NCPU -i $1 $ARG -pass 2 -passlogfile HD_pass.log -f mp4 -y $2
+ffmpeg -threads $NCPU -i $1 $ARG -pass 1 -passlogfile HD_pass -f mp4 -y /dev/null
+ffmpeg -threads $NCPU -i $1 $ARG -pass 2 -passlogfile HD_pass -f mp4 -y $2
 
-#rm HD_pass.log
+rm HD_pass*
 
+echo
 echo "Fin du codage HD"
-
+echo
 

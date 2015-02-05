@@ -194,11 +194,13 @@ ac3: $(SONSAC3)
 #     #     et les .mp3 et .txt, dans les fichiers sons et textes
 #     exclus tout les reste
 #     #  le fichier syncing signale qu'un transfert est deja en route
-# pour que rsync fonctionne, il faut avoir fait un certificat ssh-keygen et opsé la clép publique sur SSH-USER
+# pour que rsync fonctionne, il faut avoir fait un certificat ssh-keygen et posé la clép publique sur SSH-USER
 .PHONY: transfert
 transfert: 
 	rsync -a --copy-links \
-	--include '*/' --include 'video.avi' --include 'video.HD' --include '*.jpg' --include '*.mp3' --include '*.txt' --include 'public' --include '*.xml' --exclude '*' . $(SSH-USER):$(VIDEO-DIR)
+		--include '*/' --include 'video.avi' --include 'video.HD' --include '*.jpg' --include '*.mp3' \
+		--include '*.txt' --include 'public' --include '*.xml' \
+		--exclude '*' . $(SSH-USER):$(VIDEO-DIR)
 	cd $(MAKEdir); rsync -a auto.sh Makefile make.log $(SSH-USER):$(BCK-DIR)
 
 # pour créer localement les divx (pas appelé par 'all')

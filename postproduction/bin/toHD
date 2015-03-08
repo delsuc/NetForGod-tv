@@ -34,8 +34,8 @@ ARG="-vcodec h264 -b:v 2100k -aspect $ASPECT -s 960x720 -deinterlace"
 
 echo Codage HD sur $NCPU processeurs  de $1 vers $2 en $ASPECT
 
-ffmpeg -threads $NCPU -i $1 $ARG -pass 1 -passlogfile HD_pass -f mp4 -y /dev/null
-ffmpeg -threads $NCPU -i $1 $ARG -pass 2 -passlogfile HD_pass -f mp4 -y $2
+ffmpeg  -i $1 -threads $NCPU $ARG -pass 1 -passlogfile HD_pass -f mp4 -y /dev/null
+ffmpeg  -i $1 -threads $NCPU $ARG -pass 2 -passlogfile HD_pass -f mp4 -y $2
 
 rm HD_pass*
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+contient les paramÃ¨tres pour la compression du film
+start_at : la valeur en second oÃ¹ il faut sauter avant de commencer (pour enlever le gÃ©nÃ©ric)
+
+ -->
+
+<FOI_MOVIE>
+        <start_at value="47"/>
+</FOI_MOVIE>
+

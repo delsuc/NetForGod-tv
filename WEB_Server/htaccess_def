@@ -1,0 +1,6 @@
+AuthType Basic
+AuthName "Acces reserve' aux membres NetForGod"
+AuthUserFile /home/netforgod/FOI_prgm/.htpasswd
+<limit GET PUT POST>
+require valid-user
+</limit>

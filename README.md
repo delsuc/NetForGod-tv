@@ -58,5 +58,7 @@ The organsation on the disk is as follows :
         
 The video is  jw_flvplayer.swf
 
-and a picture browser `viewer.swf` is used : http://www.airtightinteractive.com/simpleviewer/ 
+and a picture browser `viewer.swf` is used : http://www.airtightinteractive.com/simpleviewer/
 
+Additional doc can be found in the file `WEB_Server / www / prgm / doc.php`
+This is the live documentation of the back-office (probably a bit out-dated)

@@ -18,7 +18,7 @@ global current_dir, page, page_wrong
 current_dir = './'
 
 # page template for download
-page="""<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+page="""<!DOCTYPE html">
 <html lang="en,fr" xml:lang="en,fr" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
@@ -106,7 +106,7 @@ dl.innerHTML=" <?php echo $load_html; ?> ";
 """
 
 # page if something went wrong
-page_wrong="""<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+page_wrong="""<!DOCTYPE html">
 <html lang="en,fr" xml:lang="en,fr" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />
@@ -226,7 +226,7 @@ if (file_exists($file)) {
     @fclose($F);
 } else {
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html">
 <html lang="en,fr" xml:lang="en,fr" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta content="text/html; charset=utf-8" http-equiv="content-type" />

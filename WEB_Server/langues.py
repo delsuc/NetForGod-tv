@@ -12,7 +12,7 @@ pour rajouter une langue, rajouter une entrée dans langues, languages, lang_sel
 rajouter son nom à ordrelangues 
 
 Attention:
-si vous voulez garder la compatibilité avec une version antérieur du sit, il faut obligatoirement rajouter A LA FIN de ordrelangues 
+si vous voulez garder la compatibilité avec une version antérieure du site, il faut obligatoirement rajouter A LA FIN de ordrelangues 
 """
 __author__ = "M-A.Delsuc"
 __version__ = "1.3 oct 2011"
@@ -30,19 +30,22 @@ month_name =[" ","January","February","March","April","May","June","July","Augus
 langues = {'FR':u'Français', 'EN':u'Anglais', 'DE':u'Allemand', 'ES':u'Espagnol', 'IT':u'Italien','PT':u'Portugais',
         'HU':u'Hongrois','NL':u'Néerlandais','CS':u'Tchèque','SK':u'Slovaque','LV':u'Letton','PL':u'Polonais','RU':u'Russe', 'LT':u'Lituanien',
         'TR':u'Turc', 'AR':u'Arabe','HY':u'Arménien','ZH':u'Chinois','JA':u'Japonais','VI':u'Vietnamien',
-        'MOS':u'Mooré','LN':u'Lingala','RN':u'Kirundi','MU':u'Créole Mauricien','MG':u'Malgache','NG':u'Ngambaye'}
+        'MOS':u'Mooré','LN':u'Lingala','RN':u'Kirundi','MU':u'Créole Mauricien','MG':u'Malgache','NG':u'Ngambaye',
+	'TL':u'Tagalog'}
 
 # le nom des langues en anglais
 languages = {'FR':'French', 'EN':'English', 'DE':'German', 'ES':'Spanish','IT':'Italian','PT':'Portuguese',
         'HU':'Hungarian','NL':'Dutch','CS':'Czech','SK':'Solvak','LV':'Latvian','PL':'Polish','RU':'Russian', 'LT':'Lithuanian',
         'TR':'Turkish','AR':'Arabic','HY':'Armenian','ZH':'Chinese','JA':'Japanese','VI':'Vietnamese',
-        'MOS':'Mossi','LN':'Lingala','RN':'Kirundi','MU':'Mauritian Creole','MG':'Malagasy','NG':u'Ngambay'}
+        'MOS':'Mossi','LN':'Lingala','RN':'Kirundi','MU':'Mauritian Creole','MG':'Malagasy','NG':u'Ngambay',
+	'TL':u'Tagalog'}
 
 # le nom des langues dans leur propres langue
 lang_self = {'FR':u'Français', 'EN':u'English', 'DE':u'Deutsch', 'ES':u'Español','IT':u'Italiano','PT':u'Português',
         'HU':u'Magyar','NL':u'Nederlands','CS':u'Česky','SK':u'Slovenčina','LV':u'Latviski','PL':u'Polski','RU':u'Pусский', 'LT':u'Lietuviškai',
         'TR':u'Türkçe','AR':u'العربية','HY':u'Հայերեն','ZH':u'漢語','JA':u'日本語','VI':u'Tiếng Việt',
-        'MOS':u'Mòoré','LN':u'Lingala','RN':u'Kirundi','MU':u'Kreol moricien','MG':u'Malagasy','NG':u'Ngambaye'}
+        'MOS':u'Mòoré','LN':u'Lingala','RN':u'Kirundi','MU':u'Kreol moricien','MG':u'Malagasy','NG':u'Ngambaye',
+        'TL':u'Tagalog'}
 
 # le mot résumé dans qq langues
 resume = {
@@ -63,7 +66,7 @@ resume = {
     "SK" : u"Zhrnutie"}
 
 # l'ordre des langues
-ordrelangues = 'FR EN DE ES IT PT HU NL CS SK LV LT PL RU TR HY AR ZH JA VI MOS LN RN MU MG NG'
+ordrelangues = 'FR EN DE ES IT PT HU NL CS SK LV LT PL RU TR HY AR ZH JA VI TL MOS LN RN MU MG NG'
 
 def create_js(filename="langues.js"):
     """crée un fichier javascript qui sera utilisable dans les pages WEB"""

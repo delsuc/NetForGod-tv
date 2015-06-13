@@ -7,8 +7,8 @@ The system is supposed to work on two independent machines
 
 ### the postproduction machine
  * It produces the various videos and sound files independently
-   * for sounds : *.wav $\Rightarrow$ *.ac3 $\Rightarrow$ *.mp3
-   * for video *.mp' $\Rightarrow$ *.HD $\Rightarrow$ *.avi
+   * for sounds : *.wav ⇒ *.ac3 ⇒ *.mp3
+   * for video *.mp' ⇒ *.HD ⇒ *.avi
       * .HD is a .mp4 containing a 720p version of the source
  * this code is run periodically by cron to prepare the video and sounds file
  * this is mostly a large `Makefile` program, it relies heavily on `ffmpeg` to realise is task

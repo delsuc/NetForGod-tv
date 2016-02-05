@@ -1,3 +1,15 @@
+Le plus simple pour modifier le projet
+
+sur son PC
+- faire un clone depuis bitbucket sur sa machine de travail
+- faire des modifs locales
+- hg commit / hg push
+
+Sur le site cible (dans un dossier à part  - par exemple HG )
+- hg clone ou hg pull
+- recopier les fichiers modifiés dans les emplacements finaux
+
+
 Deploiment
 configuration.sh
 langues.py
@@ -30,6 +42,7 @@ semi-prive
 prgm
 
 pas de blanc dans les noms de fichiers !
+pas de codage CRLF (Windows) !
 fabriquer langues.js
 fabriquer langues.php
 fabriquer configuration.php
